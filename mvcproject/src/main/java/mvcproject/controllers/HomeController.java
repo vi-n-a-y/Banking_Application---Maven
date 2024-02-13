@@ -22,12 +22,12 @@ import mvcproject.controllers.entity.BankDTO;
 public class HomeController extends HttpServlet {
 	
 	
-//	@RequestMapping("/")
-//	public String getPage() {
-////		ModelAndView m=new ModelAndView("bank");
-//		/* m.setViewName("bank"); */
-//		return "bank";
-//	}
+	@RequestMapping("/")
+	public String getPage() {
+//		ModelAndView m=new ModelAndView("bank");
+		/* m.setViewName("bank"); */
+		return "bank";
+	}
 	private static final long serialVersionUID = 1L;
 
     public HomeController() {
@@ -69,12 +69,6 @@ public class HomeController extends HttpServlet {
 			throw new ServletException(ex);
 		}
 	}
-		
-	
-
-
-
-	
 	public void credintials(HttpServletRequest request, HttpServletResponse response)throws SQLException,ServletException, IOException {
 		String user_name = request.getParameter("u_name");
 		String user_pass = request.getParameter("u_pass");
@@ -87,7 +81,7 @@ public class HomeController extends HttpServlet {
 				session.setAttribute("user", user);
 				int id = user.getUserId();
 				System.out.println("sysout in Home_page java " + id);
-				RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
 				rd.forward(request, response);
 			} else {
 				throw new RuntimeException("No Account found,Enter correct Crenditials to Login!");

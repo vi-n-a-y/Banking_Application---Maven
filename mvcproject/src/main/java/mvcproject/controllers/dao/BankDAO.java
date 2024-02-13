@@ -39,12 +39,12 @@ public class BankDAO {
 		
 		Session session=SessionFactoryProvider.getSessionFactory();
 		transaction=session.beginTransaction();
-		Query<BankDTO> query = session.createQuery("FROM BankDTO WHERE username = :username AND password = :password", BankDTO.class);
+		Query<BankDTO> query = session.createQuery("FROM BankDTO WHERE user_name = '" + uname + "' AND user_pass ='" + password + "' ", BankDTO.class);
 		
 
 		try {
-			 query.setParameter("username", uname);
-		        query.setParameter("password", password);
+			 query.setParameter("user_name", uname);
+		        query.setParameter("user_pass", password);
 			
 
 		} catch (Exception ex) {

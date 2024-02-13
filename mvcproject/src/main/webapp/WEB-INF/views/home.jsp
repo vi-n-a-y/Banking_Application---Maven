@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="com.vin.bankdto.BankDTO"%>
-<%@ page import="com.vin.bankdto.AccountDTO"%>
-<%@ page import="com.vin.bankdao.BankDAO"%>
+<%@ page import="mvcproject.controllers.entity.BankDTO"%>
+<%-- <%@ page import="com.vin.bankdto.AccountDTO"%>
+<%@ page import="com.vin.bankdao.BankDAO"%> --%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -52,7 +52,7 @@
         <%} %> 
 
     </div>
-    <a href="accountAdd.jsp" ><button class="sign">Add Account</button></a>
+<%--     <a href="accountAdd.jsp" ><button class="sign">Add Account</button></a>
     
      <%BankDAO detailsDao=new BankDAO(); 
      List<AccountDTO>  data=detailsDao.getAccDetails(user.getUserId());  %>
@@ -85,7 +85,7 @@
   <%} else{ %>
                  <h3 class="acc_head">No Account Found.Add Account details</h3>      
                 
-          <%} %>
+          <%} %> --%>
   
           
            

@@ -11,13 +11,6 @@ import javax.persistence.Table;
 @Table(name="user_info")
 public class BankDTO {
 	
-	
-	
-	
-	
-	
-	
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="user_id")

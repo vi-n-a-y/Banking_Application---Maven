@@ -15,8 +15,8 @@
 	<property name="show_sql">true</property>
 	
 	
-	<mapping class="com.controller.entity.AccountDTO" />
-	<mapping class="com.controller.entity.BankDTO" />
+
+	<mapping class="mvcproject.controllers.entity.BankDTO" />
 	
 	</session-factory>
 	
