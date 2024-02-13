@@ -1,0 +1,190 @@
+@charset "ISO-8859-1";
+
+  .main_container{
+        width:100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg,#4e085f,#153677);
+        padding:10px;
+    }
+    .credit{
+         background:linear-gradient(#ee8133,#1d8eb4); 
+        color:white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+       top: 30%;
+       left:39%;
+       border:2px solid red;
+       padding:60px 30px;
+       
+    }
+    .info{
+            background:linear-gradient(#ee8133,#1d8eb4); 
+        color:white;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        position: absolute;
+       top: 12%;
+       left:39%;
+       border:2px solid red;
+       padding:50px 50px;
+        display: none; 
+        }
+        .sign_sub{
+        color:red;
+        background-color: white;
+        padding: 3px 15px;
+      margin:2px 5px 2px 5px; 
+        float:left;
+        }
+  .sign_regi{
+        color:red;
+        background-color: white;
+        padding: 3px 15px;
+       margin:2px 5px 2px 5px; 
+        float:left;
+
+    } 
+    .forgot{
+        color:red;
+        text-decoration: none;
+       padding: 3px 1px 3px 1px;       
+        float:left ;  
+    }
+    .forgot:hover{
+        color:orange;
+    }
+
+
+    .info_inp {
+        margin: 20px 20px;
+        height:20px;
+    }
+    .inp{
+    	margin-top:20px;
+    }
+      .regi_btn{
+       color:rgb(0,0,160);
+       background-color: white;
+        padding:3px 15px;
+   	  margin-left:20px; 
+        float:left; 
+      
+   }
+     .regi_btn2{
+       color:rgb(0, 0, 160);
+       background-color: white;
+       padding:3px 15px;
+        /*  margin-left:20px;  */
+       
+      position:absolute;
+      top:473px;
+      left:254px;
+    
+      
+     
+   }
+ 
+  /* jsp */
+
+        .bg_black{
+            background-color: black;
+            height:50px;
+            padding-top:25px;
+            color:white;
+        
+        
+        }
+        .logo1{
+            font-size:20px;
+            padding-left:35px;
+            color:white;
+            margin-right:20px;
+             text-decoration: none;
+        }
+         .nav {
+             padding-right:120px; 
+            text-decoration: none;
+            color:white;
+            
+        
+        }
+        .search{
+            background-color: orange;
+            color:white;
+            
+           
+        }
+        
+        .search:hover{
+            background-color: blue;
+            color:orange;
+        }
+        .sign{
+            background-color: orange;
+            color:white;
+            border-radius: 10%;
+        padding:2px 10px ;
+           
+            margin-right: 10px; 
+        }
+        .sign:hover{
+            background-color: blue;
+            color:orange;
+        }
+        .pers_info{
+            padding: 20px 50px;
+            margin: 20px 50px;
+            border:2px solid black;
+        }
+        .acc_info{
+            padding: 20px 50px;
+            margin: 20px 50px;
+            border:2px solid red;
+        }
+        .info_text{
+            margin: 20px 20px;
+                height:20px;
+        }
+        .acc_head{
+            text-align: center;
+            color:red;
+        }
+        .para{
+            display: none;
+        }
+        .min_stm{
+        
+			       
+         margin:50px 25px;
+        }
+        
+        
+        /* //addMoney */
+		 .add_mny{
+            border:2px solid black;
+        }
+        .markRed{
+            color:red;
+            text-align: center;
+        }
+
+        .send_mny{
+        padding: 20px 50px;
+            margin: 20px 50px;
+            border:2px solid black;
+        }
+        
+         .home_btn{
+        background-color: orange;
+            color:red;
+            border-radius: 10%;
+        padding:2px 10px ;
+           float:right;
+            margin-right: 10px;
+        } 
+        
+        
+ 
