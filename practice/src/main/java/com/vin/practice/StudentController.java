@@ -16,34 +16,45 @@ public class StudentController {
 		return new Student("venu",30);	
 	}
 	
+		@GetMapping("/student/{firstName}/{Points}")
+	public Student studentPathVariable(@PathVariable("firstName") String name, @PathVariable("Points") int pt) {
+
+		return new Student(name, pt);
+	}
 	
-	@GetMapping("/jdb")
-	public String getStudentList(@RequestParam(name="str")String name) {
+
+	@GetMapping("/reqPar")
+	public Student studentReqParam(@RequestParam(name = "name") String name, @RequestParam(name = "pt") int point) {
+		return new Student(name, point);
+	}
+
+	// @GetMapping("/jdb")
+	// public String getStudentList(@RequestParam(name="str")String name) {
 
 		
 		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+	// 	try {
+	// 		Class.forName("com.mysql.cj.jdbc.Driver");
 				
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practice","root","root");
+	// 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practice","root","root");
 			
-				Statement stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("select * from demo where name='" + name + "'");
-			if(rs>0) {
-				String st="successfully jdbc connected";
-			}else {
-				String st="not connected jdbc";
-			}
+	// 			Statement stmt = con.createStatement();
+	// 			ResultSet rs = stmt.executeQuery("select * from demo where name='" + name + "'");
+	// 		if(rs>0) {
+	// 			String st="successfully jdbc connected";
+	// 		}else {
+	// 			String st="not connected jdbc";
+	// 		}
 		
 				
 				
 				
-				}catch(Exception ex) {
-					ex.printStackTrace();
-				}
+	// 			}catch(Exception ex) {
+	// 				ex.printStackTrace();
+	// 			}
 		
-		return st;
-	}
+	// 	return st;
+	// }
 }
 	
 	
