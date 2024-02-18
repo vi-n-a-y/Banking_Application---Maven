@@ -28,12 +28,7 @@ public class BankController {
 		
 		return new ResponseEntity<Bank>(bankService.saveBank(bank),HttpStatus.CREATED);
 	}
-	
-//	@GetMapping
-//	public Bank checkUserNameAndPassword(@RequestParam String username,@RequestParam String password) {
-//		return bankService.checkUserNameAndPassword(username, password);
-//		
-//	}
+
 	
 	@GetMapping("{id}")
 	public ResponseEntity<Bank> getBankById(@PathVariable("id") int user_id){
