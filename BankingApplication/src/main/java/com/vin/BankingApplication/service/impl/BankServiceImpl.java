@@ -29,12 +29,6 @@ public class BankServiceImpl implements BankService {
 
 
 	public Bank getBankById(int user_id) {
-//Optional<Employee> employee = employeeRepository.findById(id);
-//if(employee.isPresent()) {
-//	return employee.get();
-//}else {
-//	throw new ResourceNotFoundException("Employee", "Id", id);
-//}
 return bankRepository.findById(user_id).orElseThrow(() -> 
 				new ResourceNotFoundException("Bank", "Id", user_id));
 
