@@ -7,32 +7,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.vin.BankingApplication.model.Bank;
-import com.vin.BankingApplication.service.BankService;
+import com.vin.BankingApplication.model.User;
+import com.vin.BankingApplication.service.UserService;
 
 @RestController
 @RequestMapping("/api/bank")
 public class BankController {
-	private BankService bankService;
+	private UserService userService;
 
-	public BankController(BankService bankService) {
+	public BankController(UserService userService) {
 		super();
-		this.bankService = bankService;
+		this.userService = userService;
 	}
 	
 //Register	
 	@PostMapping()
-	public ResponseEntity<Bank> saveBank(@RequestBody Bank bank){
+	public ResponseEntity<User> saveBank(@RequestBody User user){
 		
-		return new ResponseEntity<Bank>(bankService.saveBank(bank),HttpStatus.CREATED);
+		return new ResponseEntity<User>(userService.saveBank(user),HttpStatus.CREATED);
 	}
 
 	
-	@GetMapping("{id}")
-	public ResponseEntity<Bank> getBankById(@PathVariable("id") int user_id){
-		return new ResponseEntity<Bank>(bankService.getBankById(user_id), HttpStatus.OK);
+//	@GetMapping
+//	public ResponseEntity<Bank> checkCredintials@RequestParam(name="name") String user_name,@RequestParam(name="pass") String user_pass){
+//		return new ResponseEntity<Bank>(bankService.checkCredintials(user_name,user_pass), HttpStatus.OK);
+//	}
+	
+	
+	
+	@GetMapping
+	public User checkCredintials(@RequestParam(name="name") String userName,@RequestParam(name="pass") String userPass) {
+		return userService.checkCredintials(userName, userPass);
+		
 	}
+	
 
 }
