@@ -1,39 +1,61 @@
 package com.vin.BankingApplication.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vin.BankingApplication.exception.ResourceNotFoundException;
-import com.vin.BankingApplication.model.Bank;
-import com.vin.BankingApplication.repository.BankRepository;
-import com.vin.BankingApplication.service.BankService;
+import com.vin.BankingApplication.model.Account;
+import com.vin.BankingApplication.model.User;
+import com.vin.BankingApplication.repository.UserRepository;
+import com.vin.BankingApplication.service.UserService;
+
 
 
 @Service
-public class BankServiceImpl implements BankService {
+public class UserServiceImpl implements UserService {
 
-	private BankRepository bankRepository;
+	private  UserRepository userRepository;
 	
 	@Autowired
-	public BankServiceImpl(BankRepository bankRepository) {
+	public UserServiceImpl(UserRepository userRepository) {
 		super();
-		this.bankRepository = bankRepository;
+		this.userRepository = userRepository;
 	}
 
 	@Override
-	public Bank saveBank(Bank bank) {
+	public User saveUser(User user) {
 	
-		return bankRepository.save(bank);
+		return userRepository.save(user);
 	}
 
 
 
-	public Bank getBankById(int user_id) {
-return bankRepository.findById(user_id).orElseThrow(() -> 
-				new ResourceNotFoundException("Bank", "Id", user_id));
+//	public User getUserById(int user_id) {
+//return userRepository.findById(user_id).orElseThrow(() -> 
+//				new ResourceNotFoundException("User", "Id", user_id));
+//
+//}
 
+	
+	public User CheckCredintials(String uname, String password) {
+	
+		return userRepository.findByUnameAndPassword(uname,password);
+	}
+	
+	public List<Account> getUserAccounts(Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user != null) {
+            return user.getAccounts();
+        }
+        return Collections.emptyList();
+    }
+	
 }
+
+
 	
 	
 
-}
+

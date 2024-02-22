@@ -1,13 +1,15 @@
 package com.vin.BankingApplication.service;
 
-import com.vin.BankingApplication.model.Bank;
+import com.vin.BankingApplication.model.Account;
 
-public interface BankService {
-	Bank saveBank(Bank bank);
 
-	Bank getBankById(int user_id);
+public interface AccountService {
 	
 	
 	
+	Account addAccountDetails(Account account); 
+	
+	//Account getAccountDetails(Long id);
+	//Account getAccountDetails(String accNmbr);
 
 }

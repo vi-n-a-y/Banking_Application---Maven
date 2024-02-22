@@ -1,37 +1,101 @@
 package com.vin.BankingApplication.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-import lombok.Data ;
-
-@Data
 @Entity
-@Table(name="abcdef")
-public class Bank {
+@Table(name="banti")
+public class Account {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@Column
+	private String accountNumber;
+	@Column
+	private String ifscCode;
+	@Column
+	private String bankName;
+	@Column
+	private String acctType;
+	@Column
+	private double currBalance;
+	@ManyToOne
+	@JoinColumn(name="user_Id" )
+	private User user;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public String getIfscCode() {
+		return ifscCode;
+	}
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getAcctType() {
+		return acctType;
+	}
+	public void setAcctType(String acctType) {
+		this.acctType = acctType;
+	}
+	public double getCurrBalance() {
+		return currBalance;
+	}
+	public void setCurrBalance(double currBalance) {
+		this.currBalance = currBalance;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public Account(Long id, String accountNumber, String ifscCode, String bankName, String acctType, double currBalance,
+			User user) {
+		super();
+		this.id = id;
+		this.accountNumber = accountNumber;
+		this.ifscCode = ifscCode;
+		this.bankName = bankName;
+		this.acctType = acctType;
+		this.currBalance = currBalance;
+		this.user = user;
+	}
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
-@Id
-@GeneratedValue(strategy=GenerationType.IDENTITY)
-private Integer	user_id;
+	
+	
+	
+	
 
-@Column
-private String	user_name;
-@Column
-private String	user_pass;
-@Column
-private String	user_full_name;
-@Column
-private String	user_mail;
-@Column
-private String	user_ph;
-@Column
-private String	user_address;
+
+	
 	
 	
 
+	
+	
 }
