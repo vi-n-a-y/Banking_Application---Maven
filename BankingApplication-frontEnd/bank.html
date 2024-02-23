@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bank.css">
+</head>
+<body>
+
+    <body>
+ 
+
+        <div class="main_container">
+          <div class="credit" id="credit">
+                
+                <div> 
+                
+                <form id="form1" action="" method="post">
+            <table>         
+                <tr ><td><label >User Name:  </label></td><td><input type="text" name="u_name" size=23 class="info_inp"  placeholder="Enter your Name..." required></td></tr>
+                <tr ><td><label >Password : </label></td><td ><input type="password" size=23 name="u_pass" class="info_inp"  placeholder="Enter password Here..." required></td></tr>		 
+            </table>
+            <a href="#" class="forgot">forgot password ?</a>
+             <button class="sign_sub">Submit</button></form> 
+              <button id="getData" class="sign_regi" onclick="register()">Register</button>		
+            </div> 
+        </div>
+        <div id="output"></div>
+
+        <script>
+            document.getElementById('getData').addEventListener('click', getData);
+    
+            function getData() {
+                fetch('http://localhost:8080/api/bank')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Do something with the data
+                        document.getElementById('output').innerHTML = JSON.stringify(data);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        </script>
+
+</body>
+</html>

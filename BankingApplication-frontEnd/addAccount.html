@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bank.css">
+</head>
+<body>
+
+    <div class="pers_info">
+
+        <a  href="logout.html" ><button class="home_btn" >logout</button></a>
+        <a href="home.html"><button class="home_btn" >Home</button></a>
+               <h1 class="markRed">Add Account</h1>
+       <form action="">
+                      
+                         <table>
+                              
+                                            
+                           <tr ><td><label >Account Number :  </label></td><td><input type="text" name="acc_nmbr"  class="info_text"  required></td></tr>
+                           <tr ><td><label >Bank Name :  </label></td><td><input type="text" name="acc_bank_name"  class="info_text"  required></td></tr>
+                           <tr ><td><label >IFSC Code :  </label></td><td><input type="text" name="acc_ifsc"  class="info_text" required ></td></tr>                
+                          <tr ><td><label >Account Type : </label></td><td ><input type="text"  name="acc_type" class="info_text"  required></td></tr>
+                           <tr ><td><label >Current Balance :  </label></td><td><input type="text" name="acc_bal"  class="info_text" required></td></tr>                    
+                       </table>
+                       <button class="sign" onclick="addacc()" >submit</button>
+                       </form> 
+       </div>
+       </body>
+</body>
+</html>

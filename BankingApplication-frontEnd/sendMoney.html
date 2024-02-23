@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bank.css">
+</head>
+<body>
+    
+    <body>
+
+
+<div class="pers_info">
+ <a  href="logout.html" ><button class="home_btn" >logout</button></a>
+ <a href="home.html"><button class="home_btn" >Home</button></a>
+<h1 class="acc_head">Send Money</h1>
+       <form action="">
+            <table> 
+ 
+               <tr ><td><label>Receiver Account Number :</label></td><td >  <input type="text" name="rec_acc" class="info_inp"  required></td></tr>
+               <tr ><td><label >Receiver IFSC Code :</label></td><td ><input type="text"  name="rec_ifsc" class="info_inp"  ></td></tr>
+              <tr ><td> <label>Description :</label></td><td ><input type="text" name="description"  class="info_inp"  required></td></tr>
+               <tr ><td><label >Total Amount to transfer :</label></td><td ><input name="total_amount"  name="total_amt" class="info_inp"  required></td></tr>
+         		
+           </table>
+           <button class="sign" onclick="checkSend()">send</button>
+         </form>
+    </div>   
+
+</body>
+</html>

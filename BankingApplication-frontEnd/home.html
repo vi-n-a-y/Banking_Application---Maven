@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bank.css">
+</head>
+
+<body>
+
+    <div class="home_main">
+        <div class="bg_black">
+            <b> <a class="logo1" href="#">Pir@es.Bank</a></b>
+            <a class="nav" href="#">MENU</a>
+            <a class="nav" href="addMoney.html">ADD MONEY</a>
+            <a class="nav" href="Statement.html">STATEMENT</a>
+            <a class="nav" href="SendMoney.html">SEND MONEY</a>
+            <input type="text" placeholder="search">
+            <button class="search">search</button>
+            <a href="logout.html"><button class="sign">logout</button></a>
+        </div>
+        <div class="pers_info">
+            <h1 class="acc_head">User Details</h1>
+
+            <table>
+
+                <tr>
+                    <td><label>User Name : </label></td>
+                    <td><input type="text" name="info_user" class="info_text"></td>
+                </tr>
+                <tr>
+                    <td><label>Full Name : </label></td>
+                    <td><input type="text" name="info_pass" class="info_text"></td>
+                </tr>
+                <tr>
+                    <td><label>Phone Number : </label></td>
+                    <td><input type="text" name="info_phone" class="info_text"></td>
+                </tr>
+                <tr>
+                    <td><label>Email : </label></td>
+                    <td><input type="text" name="info_email" class="info_text"></td>
+                </tr>
+
+            </table>
+
+
+        </div>
+        <a href="addAccount.html"><button class="sign">Add Account</button></a>
+
+        <h1 class="acc_head">Account Details</h1>
+
+        <div class="acc_info">
+            <table>
+                <tr>
+                    <td><label>Accounts : </label></td>
+                    <td><input type="radio" name="acc_id" class="info_text" checked></td>
+                </tr>
+                <tr>
+                    <td><label>Account Number : </label></td>
+                    <td><input type="text" name="acc_nmbr" class="info_text"></td>
+                    <td>
+                </tr>
+                <tr>
+                    <td><label>Bank Name : </label></td>
+                    <td><input type="text" name="acc_bank_name" class="info_text"></td>
+                </tr>
+                <tr>
+                    <td><label>IFSC Code : </label></td>
+                    <td><input type="text" name="acc_ifsc" class="info_text"></td>
+                </tr>
+                <tr>
+                    <td><label>Account Type : </label></td>
+                    <td><input type="text" name="acc_type" class="info_text"></td>
+                </tr>
+                <tr>
+                    <td><label>Current Balance : </label></td>
+                    <td><input type="text" name="acc_bal" class="info_text"></td>
+                </tr>
+
+            </table>
+        </div>
+
+
+        <form action="addMoney.html">
+            <button class="sign" id="btn" onclick="">Add Money</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
+
+</body>
+
+</html>

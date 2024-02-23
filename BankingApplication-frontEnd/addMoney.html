@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bank.css">
+</head>
+<body>
+    
+
+    <div class="pers_info">
+        <a href="home.html"><button class="home_btn" >Home</button></a>
+         <a  href="logout.html" ><button class="home_btn" >logout</button></a>
+                <h1 class="markRed">ADD MONEY</h1>
+                <form action=""> 
+        
+            <table>        
+                <tr ><td><label >Account Number :</label></td><td><input type="text"  name="add_acc_nmbr" class="info_inp"  ></td></tr>
+                <tr ><td><label > IFSC Code :</label></td><td ><input type="text"  name="add_ifscc_cd"  class="info_inp"  ></td></tr>
+                <tr ><td><label > Current Balance :</label></td><td ><input type="text"  name="curr_balan"  class="info_inp"  ></td></tr>
+                <tr ><td><label>Amount :</label></td><td >  <input type="text" name="add_amt" class="info_inp"  ></td></tr>  		 
+            </table>
+            <button  onclick="deposit()" class="sign">Deposit</button>
+            </form>
+</body>
+</html>
