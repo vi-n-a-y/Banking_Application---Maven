@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService {
         return Collections.emptyList();
     }
 	
+//	public List<Account> getUserAccounts(Long userId) {
+//        User user = userRepository.findById(userId).orElse(null);
+//     
+//    }
+	
 }
 
 

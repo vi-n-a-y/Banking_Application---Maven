@@ -63,8 +63,8 @@ public class BankController {
 //		return accountService.getAccountDetails(accNmbr);
 //	}
 	
-	  @GetMapping("/users/{userId}/accounts")
-	    public ResponseEntity<List<Account>> getUserAccounts(@PathVariable Long userId) {
+	  @GetMapping("/get/accs")
+	    public ResponseEntity<List<Account>> getUserAccounts(@RequestParam Long userId) {
 	        List<Account> accounts = userService.getUserAccounts(userId);
 	        return ResponseEntity.ok(accounts);
 	    }
