@@ -19,38 +19,43 @@
 
                 <div>
 
-                    <form id="crendintials" action="" method="post">
+                    <form id="crendintials" method="post">
                         <table>
                             <tr>
-                                <td><label>User Name: </label></td>
-                                <td><input type="text" name="u_name" size=23 class="info_inp"
+                                <td><label for="uname">User Name: </label></td>
+                                <td><input type="text" name="uname" id="uname" class="info_inp"
                                         placeholder="Enter your Name..." required></td>
                             </tr>
                             <tr>
                                 <td><label>Password : </label></td>
-                                <td><input type="password" size=23 name="u_pass" class="info_inp"
+                                <td><input type="password" name="password" id="password" class="info_inp"
                                         placeholder="Enter password Here..." required></td>
                             </tr>
                         </table>
                         <a href="#" class="forgot">forgot password ?</a>
-                        <button class="sign_sub">Submit</button>
+                        <button type="submit" id="loginSubmit" class="sign_sub">Submit</button>
                     </form>
-                    <button id="getData" class="sign_regi" type="submit">Register</button>
+                    <button id="getData" class="sign_regi">Register</button>
                 </div>
             </div>
-            <script>
-                document.getElementById('crendintials').addEventListener('submit', function (event) {
-                    event.PreventDefault();
-                    const formData = new FormData(this);
-                    const userData = {};
-                    formData.forEach((value, key) => {
-                        userData[key] = value;
-                    });
-                    loginCredintials(userData);
+        </div>
+        </div>
+
+
+        <script>
+            document.getElementById('crendintials').addEventListener('submit', function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                const userData = {};
+                formData.forEach((value, key) => {
+                    userData[key] = value;
                 });
-            </script>
-
-
+                loginCredintials(userData);
+            });
+        </script>
     </body>
+
+</html>
+</body>
 
 </html>

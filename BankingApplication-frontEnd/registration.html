@@ -5,31 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="bank.css">
+    <script src="bank.js"></script>
 </head>
 <body>
 
-    <div class="info" id="info">
-        <form action="" method="post">
-        
-        <table> 
-            
-           <tr><td><label>User Name :</label></td><td><input type="text" name="regi_name" class="info_inp"  placeholder="Enter your Name.."></td></tr>
-           <tr ><td><label >Password :</label></td><td><input type="password"  name="regi_pass" class="info_inp"  placeholder="Enter password Here..."></td></tr>
-           <tr ><td> <label>full Name :</label></td><td ><input type="text" name="fullName"  class="info_inp"  placeholder="Enter full Name Here..."></td></tr>
-           <tr ><td><label>email :</label></td><td >  <input type="text" name="email" class="info_inp"  placeholder="Enter your email Here..."></td></tr>
-           <tr ><td><label >Phone No. :</label></td><td ><input type="text"  name="phNo" class="info_inp"  placeholder="Enter Phone Number Here..."></td></tr>
-           <tr ><td><label >Address :</label></td><td ><input type="text"  name="address" class="info_inp"  placeholder="Enter your Address Here..."></td></tr>        		
 
+    <div class="main_container">
+    <div class="info" id="info">
        
-       </table>
-       <button class="regi_btn" >submit</button>
-       </form>
-                    
-<div class="regi_div" >  
+        <div>
+            <form id="register" method="post">
         
-     <table><tr><td><button class="regi_btn2" onclick="register()">signin</button></td></tr></table>                         
-</div>
-</div>
+                <table> 
+                    
+                   <tr><td><label>User Name :</label></td><td><input type="text" name="uname" id="uname" class="info_inp"  placeholder="Enter your Name.."></td></tr>
+                   <tr ><td><label >Password :</label></td><td><input type="password"  name="password" id="password" class="info_inp"  placeholder="Enter password Here..."></td></tr>
+                   <tr ><td> <label>full Name :</label></td><td ><input type="text" name="fullName" id="fullName"  class="info_inp"  placeholder="Enter full Name Here..."></td></tr>
+                   <tr ><td><label>email :</label></td><td >  <input type="text" name="email" id="email" class="info_inp"  placeholder="Enter your email Here..."></td></tr>
+                   <tr ><td><label >Phone No. :</label></td><td ><input type="text"  name="phno" id="phno" class="info_inp"  placeholder="Enter Phone Number Here..."></td></tr>
+                   <tr ><td><label >Address :</label></td><td ><input type="text"  name="address" id="address" class="info_inp"  placeholder="Enter your Address Here..."></td></tr>        		
+        
+               
+               </table>
+               <button type="submit" class="regi_btn" >submit</button>
+               </form>  
+             <button class="regi_btn" onclick="register()">signin</button>                      
+        
+        </div>
+
+       </div>
+
+       <script>
+        document.getElementById('register').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const userData = {};
+            formData.forEach((value, key) => {
+                userData[key] = value;
+            });
+            registrationDetails(userData);
+        });
+    </script>
+
 
 
 </div>
