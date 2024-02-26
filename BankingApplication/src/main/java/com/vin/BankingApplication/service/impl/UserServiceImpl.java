@@ -38,11 +38,11 @@ public class UserServiceImpl implements UserService {
 //
 //}
 
-	
-	public User CheckCredintials(String uname, String password) {
-	
-		return userRepository.findByUnameAndPassword(uname,password);
-	}
+	   public boolean isValidCredentials(String username, String password) {
+	        User user = userRepository.findByUnameAndPassword(username, password);
+	        return user != null; // If user is found, credentials are valid
+	    }
+
 	
 	public List<Account> getUserAccounts(Long userId) {
         User user = userRepository.findById(userId).orElse(null);

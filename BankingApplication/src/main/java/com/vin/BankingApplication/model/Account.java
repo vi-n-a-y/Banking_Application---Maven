@@ -1,5 +1,7 @@
 package com.vin.BankingApplication.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +27,8 @@ public class Account {
 	private String acctType;
 	@Column
 	private double currBalance;
+	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="user_Id" )
 	private User user;
@@ -83,7 +87,7 @@ public class Account {
 	}
 	public Account() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	

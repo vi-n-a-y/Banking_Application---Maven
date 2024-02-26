@@ -10,7 +10,7 @@ public interface UserService {
 
 	//User getUserById(int user_id);
 
-	User CheckCredintials(String uname, String password);
+	boolean isValidCredentials(String username,String password);
 
 	List<Account> getUserAccounts(Long userId);
 
