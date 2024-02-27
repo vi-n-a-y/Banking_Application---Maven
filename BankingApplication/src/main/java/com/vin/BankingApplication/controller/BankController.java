@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,25 +43,36 @@ public class BankController {
 //		return userService.saveUser(user);
 //	}
 	
+
+//	public ResponseEntity<String> CheckCredintials(@RequestBody User user) {
+//		String username=user.getUname();
+//		String password=user.getPassword();	
+//		
+//		if (userService.isValidCredentials(username, password)) {
+//            return ResponseEntity.ok("Login successful");
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
+//        }
+//		
+//	}
 	@CrossOrigin
 	@PostMapping("/get")
-	public ResponseEntity<String> CheckCredintials(@RequestBody User user) {
-		String username=user.getUname();
-		String password=user.getPassword();	
-		
-		if (userService.isValidCredentials(username, password)) {
-            return ResponseEntity.ok("Login successful");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-        }
-		
+	public ResponseEntity<List<User>> CheckCredintials(@RequestBody User user) {
+	    String username = user.getUname();
+	    String password = user.getPassword();    
+	    
+	    List<User> users = userService.getUserDataByUsernameAndPassword(username,password); // Assuming this method retrieves all users from the database
+	    
+	    userService.isValidCredentials(username, password);
+	        return ResponseEntity.ok(users); // Return all users
+	   
 	}
 	
 	@PostMapping("/add/acc")
 	public Account addAccountDetails(@RequestBody Account acc) {
 		return accountService.addAccountDetails(acc);
 		
-	}
+	} 
 	
 //	@PostMapping("/get/acc")
 //	public Account getAccountDetails(@RequestParam  Long id) {
@@ -77,4 +89,26 @@ public class BankController {
 	        List<Account> accounts = userService.getUserAccounts(userId);
 	        return ResponseEntity.ok(accounts);
 	    }
+//	  
+//	    @PostMapping("/accoun")
+//	    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+//	        // Call the service method to create the account
+//	        Account createdAccount = accountService.createAccount(account);
+//
+//	        // Return response with created account details
+//	        return new ResponseEntity<>(createdAccount, HttpStatus.CREATED);
+//	    }
+	//  @PostMapping("/accounts")
+	   
+//	    public ResponseEntity<User> createUserWithAccounts(@RequestBody User user) {
+//	        User savedUser = userService.saveUserWithAccounts(user);
+//	        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+//	    }
+	  
+	  @PostMapping("/{userId}/accounts")
+	    public ResponseEntity<User> addAccountsToUser(@PathVariable Long userId, @RequestBody List<Account> accounts) {
+	        User updatedUser = userService.addAccountsToUser(userId, accounts);
+	        return ResponseEntity.ok(updatedUser);
+	    }
+	  
 }
