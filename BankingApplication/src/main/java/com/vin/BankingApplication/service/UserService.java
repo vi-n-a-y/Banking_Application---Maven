@@ -14,4 +14,14 @@ public interface UserService {
 
 	List<Account> getUserAccounts(Long userId);
 
+	List<User> getUserDataByUsernameAndPassword(String username, String password);
+
+//	User createUserWithAccounts(User user);
+
+	//User saveUserWithAccounts(User user);
+
+	User addAccountsToUser(Long userId, List<Account> accounts);
+
+//	List<User> getAllUsers();
+
 }

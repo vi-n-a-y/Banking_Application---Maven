@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.vin.BankingApplication.exception.ResourceNotFoundException;
 import com.vin.BankingApplication.model.Account;
 import com.vin.BankingApplication.model.User;
 import com.vin.BankingApplication.repository.UserRepository;
@@ -51,11 +52,58 @@ public class UserServiceImpl implements UserService {
         }
         return Collections.emptyList();
     }
+
+
 	
 //	public List<Account> getUserAccounts(Long userId) {
 //        User user = userRepository.findById(userId).orElse(null);
 //     
 //    }
+//	
+    public List<User> getUserDataByUsernameAndPassword(String username, String password) {
+        // Check if the credentials are valid
+        if (!isValidCredentials(username, password)) {
+            throw new ResourceNotFoundException("Invalid username or password");
+        }
+        
+        // If credentials are valid, retrieve user data based on the username
+        List<User> users = userRepository.findByUname(username);
+        if (users.isEmpty()) {
+            throw new ResourceNotFoundException("User not found"); // Handle case where user with the provided username doesn't exist
+        }
+        
+        return users;
+    }
+    
+//    public User saveUserWithAccounts(User user) {
+//        List<Account> accounts = user.getAccounts();
+//        if (accounts != null) {
+//            for (Account account : accounts) {
+//                account.setUser(user);
+//            }
+//        }
+//        return userRepository.save(user);
+//    }
+    
+    
+    public User addAccountsToUser(Long userId, List<Account> accounts) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
+
+        // Set user reference for each account
+        for (Account account : accounts) {
+            account.setUser(user);
+        }
+        
+        // Add accounts to the user and save
+        user.getAccounts().addAll(accounts);
+        userRepository.save(user);
+
+        return user;
+    }
+
+
+	
 	
 }
 

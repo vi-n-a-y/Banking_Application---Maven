@@ -7,7 +7,9 @@ public interface AccountService {
 	
 	
 	
-	Account addAccountDetails(Account account); 
+	Account addAccountDetails(Account account);
+
+	Account createAccount(Account account); 
 	
 	//Account getAccountDetails(Long id);
 	//Account getAccountDetails(String accNmbr);
