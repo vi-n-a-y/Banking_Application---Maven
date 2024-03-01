@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+// import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { verifyUser } from '../services/UserService';
 
 const Login = () => {
     let navigate = useNavigate();
@@ -16,10 +18,37 @@ const Login = () => {
         });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        navigate('/register');
-        // Add your logic to handle form submission here
+
+        try {
+            
+            const response = await verifyUser(formData.uname);
+            console.log(response.data); // Log the response data
+            
+            if (response.data.length > 0) {
+                        // Extract password from the first element of the array
+                        const passwordFromServer = response.data[0].password;
+                        console.log("the password from server is "+passwordFromServer);
+                        const enteredPassword = formData.password;
+            
+                        // Check if the password is valid
+                        if (passwordFromServer === enteredPassword) {
+                            // Navigate to the home page `/home/${JSON.stringify(formData)}`
+                            navigate('/home');
+                        } else {
+                            // Handle invalid password
+                            console.error('Invalid password');
+                        }
+                    } else {
+                        // Handle case where no user data is returned
+                        console.error('No user data found');
+                    }
+                } catch (error) {
+                    // Handle errors, such as network issues or server errors
+                    console.log("enter wrong credintials")
+                    console.error('Error during login:', error);
+                }
     };
 
     return (
@@ -29,6 +58,7 @@ const Login = () => {
                     <form onSubmit={handleSubmit}>
                         <table>
                             <tr>
+                                
                                 <td><label htmlFor="uname">User Name: </label></td>
                                 <td><input type="text" name="uname" id="uname" className="info_inp"
                                         placeholder="Enter your Name..." value={formData.uname} onChange={handleInputChange} required /></td>
@@ -42,7 +72,7 @@ const Login = () => {
                         {/* <a href="#" className="forgot">forgot password ?</a> */}
                         <button type="submit" className="sign_sub">Submit</button>
                     </form>
-                    <button  onClick={handleSubmit} className="sign_regi">Register</button>
+                    <button onClick={() => navigate('/register')} className="sign_regi">Register</button>
                 </div>
             </div>
         </div>
@@ -50,3 +80,6 @@ const Login = () => {
 };
 
 export default Login;
+      // Add your logic to handle form submission here
+        //the react does not have the ablity to make HTTP requests, thus we need to use third-party libraries to achieve this.
+        //the fetch API  is a web standard built for most of the modern browsers
