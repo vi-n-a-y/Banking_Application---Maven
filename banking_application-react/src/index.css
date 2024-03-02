@@ -177,6 +177,22 @@
            float:right;
             margin-right: 10px;
         } 
+        .account-details{
+            border:solid black 2px;
+            margin:10px;
+            padding:10px;
+        }
+        .addAcct{
+            background-color: orange;
+            color:white;
+            margin-bottom:20px;
+            float:right;
+        }
+        .acc_main{
+            padding: 20px 50px;
+            margin: 10% 25%;
+            border:2px solid black;
+        }
         
         
  

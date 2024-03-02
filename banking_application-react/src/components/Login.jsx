@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { verifyUser } from '../services/UserService';
 
+
 const Login = () => {
     let navigate = useNavigate();
     const [formData, setFormData] = useState({
@@ -31,10 +32,14 @@ const Login = () => {
                         const passwordFromServer = response.data[0].password;
                         console.log("the password from server is "+passwordFromServer);
                         const enteredPassword = formData.password;
-            
+                        
                         // Check if the password is valid
                         if (passwordFromServer === enteredPassword) {
                             // Navigate to the home page `/home/${JSON.stringify(formData)}`
+                            localStorage.setItem('uname', response.data[0].uname);
+                            localStorage.setItem('userId', response.data[0].userId);
+                            console.log("the user name is from localStrorage",localStorage.getItem('uname'));
+                           // console.log(userId);
                             navigate('/home');
                         } else {
                             // Handle invalid password
@@ -58,7 +63,6 @@ const Login = () => {
                     <form onSubmit={handleSubmit}>
                         <table>
                             <tr>
-                                
                                 <td><label htmlFor="uname">User Name: </label></td>
                                 <td><input type="text" name="uname" id="uname" className="info_inp"
                                         placeholder="Enter your Name..." value={formData.uname} onChange={handleInputChange} required /></td>

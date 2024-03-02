@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../services/UserService';
 
 const Registration = () => {
     let navigate = useNavigate();
@@ -17,11 +18,32 @@ const Registration = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async(event) => {
         event.preventDefault();
-        navigate('/login');
-        // Add logic to submit form data to the server
-        console.log(formData); // For testing, log form data to the console
+        try {
+            
+            const response = await registerUser(formData);
+            console.log(response.data); // Log the response data
+            const userIdFromServer=response.data.userId;
+            console.log("the user id is "+userIdFromServer);
+            if (userIdFromServer>0) {
+                        // Extract username from the first element of the array
+                        // const regiUsername = response.data[0].uname;
+                      // console.log("the register user name is "+regiUsername);
+                      console.log("SUCCESSFULL registered");
+                       navigate('/');
+            
+                       
+                   
+                    } else {
+                        
+                        console.error('some problem while inserting the user details');
+                    }
+                } catch (error) {
+                    // Handle errors, such as network issues or server errors
+                    console.log("enter wrong credintials")
+                    console.error('Error during login:', error);
+                }
     };
 
     return (
