@@ -84,11 +84,11 @@ public class BankController {
 //		return accountService.getAccountDetails(accNmbr);
 //	}
 	
-	  @GetMapping("/get/accs")
-	    public ResponseEntity<List<Account>> getUserAccounts(@RequestParam Long userId) {
-	        List<Account> accounts = userService.getUserAccounts(userId);
-	        return ResponseEntity.ok(accounts);
-	    }
+	@GetMapping("/{userId}")
+	public ResponseEntity<List<Account>> getUserAccounts(@PathVariable Long userId) {
+		List<Account> accounts = userService.getUserAccounts(userId);
+		return ResponseEntity.ok(accounts);
+	}
 //	  
 //	    @PostMapping("/accoun")
 //	    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
@@ -105,10 +105,10 @@ public class BankController {
 //	        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
 //	    }
 	  
-	  @PostMapping("/{userId}/accounts")
-	    public ResponseEntity<User> addAccountsToUser(@PathVariable Long userId, @RequestBody List<Account> accounts) {
-	        User updatedUser = userService.addAccountsToUser(userId, accounts);
-	        return ResponseEntity.ok(updatedUser);
-	    }
+	 @PostMapping("/set/{userId}")
+	public ResponseEntity<User> addAccountsToUser(@PathVariable Long userId, @RequestBody List<Account> accounts) {
+		User updatedUser = userService.addAccountsToUser(userId, accounts);
+		return ResponseEntity.ok(updatedUser);
+	}
 	  
 }
