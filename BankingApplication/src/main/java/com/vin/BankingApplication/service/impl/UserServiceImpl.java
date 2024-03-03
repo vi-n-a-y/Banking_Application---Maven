@@ -39,10 +39,10 @@ public class UserServiceImpl implements UserService {
 //
 //}
 
-	   public boolean isValidCredentials(String username, String password) {
-	        User user = userRepository.findByUnameAndPassword(username, password);
-	        return user != null; // If user is found, credentials are valid
-	    }
+//	   public boolean isValidCredentials(String username) {
+//	        User user = userRepository.findByUname(username);
+//	        return user != null; // If user is found, credentials are valid
+//	    }
 
 	
 	public List<Account> getUserAccounts(Long userId) {
@@ -60,11 +60,11 @@ public class UserServiceImpl implements UserService {
 //     
 //    }
 //	
-    public List<User> getUserDataByUsernameAndPassword(String username, String password) {
+    public List<User> getUserDataByUsername(String username) {
         // Check if the credentials are valid
-        if (!isValidCredentials(username, password)) {
-            throw new ResourceNotFoundException("Invalid username or password");
-        }
+//        if (!isValidCredentials(username)) {
+//            throw new ResourceNotFoundException("Invalid username or password");
+//        }
         
         // If credentials are valid, retrieve user data based on the username
         List<User> users = userRepository.findByUname(username);
@@ -75,16 +75,7 @@ public class UserServiceImpl implements UserService {
         return users;
     }
     
-//    public User saveUserWithAccounts(User user) {
-//        List<Account> accounts = user.getAccounts();
-//        if (accounts != null) {
-//            for (Account account : accounts) {
-//                account.setUser(user);
-//            }
-//        }
-//        return userRepository.save(user);
-//    }
-    
+
     
     public User addAccountsToUser(Long userId, List<Account> accounts) {
         User user = userRepository.findById(userId)
@@ -101,6 +92,8 @@ public class UserServiceImpl implements UserService {
 
         return user;
     }
+
+
 
 
 	

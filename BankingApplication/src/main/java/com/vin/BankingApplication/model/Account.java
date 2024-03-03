@@ -12,12 +12,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="banti")
+//@Table(name="banti")
+@Table(name = "samplee")
 public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column
+	@Column(unique = true)
 	private String accountNumber;
 	@Column
 	private String ifscCode;
@@ -89,7 +90,12 @@ public class Account {
 		super();
 		
 	}
-	
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", accountNumber=" + accountNumber + ", ifscCode=" + ifscCode + ", bankName="
+				+ bankName + ", acctType=" + acctType + ", currBalance=" + currBalance + ", user=" + user + "]";
+	}
+
 	
 	
 	

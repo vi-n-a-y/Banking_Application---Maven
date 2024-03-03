@@ -7,6 +7,7 @@ import com.vin.BankingApplication.model.Account;
 import com.vin.BankingApplication.model.User;
 import com.vin.BankingApplication.repository.AccountRepository;
 import com.vin.BankingApplication.service.AccountService;
+import com.vin.BankingApplication.exception.ResourceNotFoundException;
 
 @Service
 public class AccountServiceImpl implements AccountService{
@@ -49,4 +50,50 @@ public class AccountServiceImpl implements AccountService{
 	        return accountRepository.save(account);
 	    }
 
+
+
+
+	
+
+
+
+
+	
+	
+	public Account addAmountToAcc(String accountNumber, Double amount) {
+	    Account account = accountRepository.findByAccountNumber(accountNumber)
+	            .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + accountNumber)); // if doesnt exists in the database then throw exception
+	    double totalAmount = account.getCurrBalance() + amount;
+	    account.setCurrBalance(totalAmount);
+	    Account savedAccount = accountRepository.save(account);
+	    return savedAccount;
+	    }
+
+
+
+
+	
+	public Account sendMoney(String accountNumber, Double amount) {
+		 Account account = accountRepository.findByAccountNumber(accountNumber)
+		            .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + accountNumber)); 
+		if(account.getCurrBalance()<amount) {
+			throw new RuntimeException("Insufficient balance , before sending amout add amount to your account");
+		}
+		double avaliBalance=account.getCurrBalance()-amount;
+		account.setCurrBalance(avaliBalance);
+		Account savedAccount=accountRepository.save(account);
+		return savedAccount;
+		 
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+
 }
+
+

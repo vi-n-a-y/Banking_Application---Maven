@@ -10,11 +10,11 @@ public interface UserService {
 
 	//User getUserById(int user_id);
 
-	boolean isValidCredentials(String username,String password);
+//	boolean isValidCredentials(String username,String password);
 
 	List<Account> getUserAccounts(Long userId);
 
-	List<User> getUserDataByUsernameAndPassword(String username, String password);
+	List<User> getUserDataByUsername(String username);
 
 //	User createUserWithAccounts(User user);
 
