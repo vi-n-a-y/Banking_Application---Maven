@@ -16,6 +16,9 @@ const AddAccount = () => {
         updatedFormData[index] = { ...updatedFormData[index], [name]: value };
         setFormData(updatedFormData);
     };
+    const handleHome = () => {
+        navigate('/home');
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -34,8 +37,8 @@ const AddAccount = () => {
 
     return (
         <div className="add_main">
-            <a href="logout.html"><button className="home_btn">Logout</button></a>
-            <a href="home.html"><button className="home_btn">Home</button></a>
+            <a href=""><button className="home_btn">Logout</button></a>
+           <button className="home_btn" onClick={handleHome}>Home</button>
             <div className="acc_main">
                 <h1 className="markRed">Add Account</h1>
                 <form id="accountDetails" onSubmit={handleSubmit}>

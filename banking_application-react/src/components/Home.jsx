@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { verifyUser } from '../services/UserService';
-import axios from 'axios';
+
 
 const Home = () => {
     const navigate = useNavigate();
@@ -23,6 +23,7 @@ const Home = () => {
             console.error('Error fetching user data:', error);
         }
     };
+   
 
     const handleAddMoney = () => {
         navigate('/addMoney');
@@ -79,8 +80,11 @@ const Home = () => {
     {userData && userData[0].accounts.length > 0 ? (
         userData[0].accounts.map((account, index) => (
             <div key={index} className="account-details">
-                <h2>Account {index + 1}</h2>
+                
                 <table>
+                <tr>
+                    <td><label>Account {index + 1} : </label></td>
+                    <td><input type="radio" name="id" value={account.id} className="info_text" checked /></td></tr>     
                 <tr>
                     <td><label>Account Number : </label></td>
                     <td><input type="text" name="accountNumber" value={account.accountNumber} className="info_text" readOnly /></td>
