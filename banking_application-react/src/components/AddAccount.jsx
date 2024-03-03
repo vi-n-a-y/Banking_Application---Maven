@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addAccToUser } from '../services/UserService';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,15 +6,15 @@ const AddAccount = () => {
     let navigate = useNavigate();
     const [formData, setFormData] = useState([]);
 
+    useEffect(() => {
+        setFormData([{ accountNumber: '', bankName: '', ifscCode: '', acctType: '', currBalance: '' }]);
+    }, []); // Initialize formData with an empty account when the component mounts
+
     const handleChange = (event, index) => {
         const { name, value } = event.target;
         const updatedFormData = [...formData];
         updatedFormData[index] = { ...updatedFormData[index], [name]: value };
         setFormData(updatedFormData);
-    };
-
-    const handleAddAccount = () => {
-        setFormData([...formData, { accountNumber: '', bankName: '', ifscCode: '', acctType: '', currBalance: '' }]);
     };
 
     const handleSubmit = async (event) => {
@@ -63,8 +63,8 @@ const AddAccount = () => {
                             </tr>
                         </table>
                     ))}
-                    <button type="button" onClick={handleAddAccount} className="sign">Add Account</button>
-                    <button type="submit" className="sign">Submit</button>
+                    {!formData.length && <button type="button" onClick={() => setFormData([{ accountNumber: '', bankName: '', ifscCode: '', acctType: '', currBalance: '' }])} className="sign">Add Account</button>}
+                    {!!formData.length && <button type="submit" className="sign">Submit</button>}
                 </form>
             </div>
         </div>
