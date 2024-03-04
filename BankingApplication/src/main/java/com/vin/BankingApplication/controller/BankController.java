@@ -59,6 +59,12 @@ public class BankController {
 		List<Account> accounts = userService.getUserAccounts(userId);
 		return ResponseEntity.ok(accounts);
 	}
+	
+    @GetMapping("/acc/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable Long id){
+        Account account =accountService.getAccountById(id);
+        return ResponseEntity.ok(account);
+    }
 
 	// its add account the user and get all account details and user details
 	@PostMapping("/set/{userId}")
@@ -67,7 +73,7 @@ public class BankController {
 		return ResponseEntity.ok(updatedUser);
 	}
 	//add money to the specfic account
-    @PutMapping("/{accNmbr}/addAmt")
+    @PutMapping("/addAmt/{accNmbr}")
     public ResponseEntity<Account> addAmountToAcc(@PathVariable String accNmbr ,@RequestBody Map<String , Double> request){
         Double amount = request.get("amount"); //storing the input
         Account account = accountService.addAmountToAcc(accNmbr , amount);
@@ -75,7 +81,7 @@ public class BankController {
     }
 	
     
-    @PutMapping("/{accNmbr}/sendMoney")
+    @PutMapping("/sendMoney/{accNmbr}")
     public ResponseEntity<Account> sendMoney(@PathVariable String accNmbr,@RequestBody Map<String,Double> request){
         Double amount = request.get("amount");
         Account account = accountService.sendMoney(accNmbr, amount);
