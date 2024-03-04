@@ -42,10 +42,10 @@ const AddMoney = () => {
 
         try {
             
-            const response = await addMoneyToAcc(accountData.accountNumber, amountData.amount );
+            const response = await addMoneyToAcc(accountData.id, amountData.amount );
            // const response= await axios.put(`http://localhost:8080/api/bank/addAmt/${accountData.accountNumber}`, { amount: amountData.amount })
             console.log("the adding amount is : "+amountData.amount);
-            console.log("the account numbere  is : "+accountData.accountNumber);
+            console.log("the account numbere  is : "+accountData.id);
             console.log(response.data); 
             const Amount=response.data.currBalance;
             // Log the response data
