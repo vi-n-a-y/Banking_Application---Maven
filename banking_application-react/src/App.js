@@ -5,6 +5,7 @@ import Registration from "./components/Registration"
 import Home from "./components/Home"
 import AddAccount from "./components/AddAccount";
 import AddMoney from "./components/AddMoney";
+import SendMoney from "./components/SendMoney";
 const App=()=>{
   return (
     <>
@@ -14,7 +15,8 @@ const App=()=>{
           <Route path="/register" element={<Registration />} />
           <Route path="/home" element={<Home />}/>
           <Route path="/addAcc" element={<AddAccount/>}/>
-          <Route path="/addMoney" element={<AddMoney/>}/>
+          <Route path="/addMoney/:accountId" element={<AddMoney/>}/>
+          <Route path="/sendMoney" element={<SendMoney/>}/>
         </Routes>
       </BrowserRouter>
     </>

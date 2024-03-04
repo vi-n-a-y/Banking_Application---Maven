@@ -1,30 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { addMoneyToAcc, getAccById } from '../services/UserService';
+import { useParams } from 'react-router-dom';
 
 const AddMoney = () => {
     let navigate = useNavigate();
+    const { accountId } = useParams();
     const [accountData, setAccountData] = useState({});
+    const [ amountData , setAmountData]=useState({});
+    
+
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setAmountData({ ...amountData, [name]: value }); // Spread the existing state object
+    };
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('your-api-endpoint-here');
-                setAccountData(response.data);
-            } catch (error) {
-                console.error('Error fetching account data:', error);
-            }
-        };
+        // Fetch data using accountId
+        fetchData(accountId);
+    }, [accountId]);
 
-        fetchData();
-    }, []);
+    const fetchData = async (accountId) => {
+        try {
+            // Your axios method call using accountId
+            const response = await axios.get(`http://localhost:8080/api/bank/acc/${accountId}`);
+            setAccountData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    
     const handleHome = () => {
         navigate('/home');
     };
 
-    const handleDeposit = () => {
-        // Your deposit logic goes here
-        console.log('Deposit button clicked');
+    const handleDeposit = async (event) => {
+        event.preventDefault();
+        
+
+        try {
+            
+            const response = await addMoneyToAcc(accountData.accountNumber, amountData.amount );
+           // const response= await axios.put(`http://localhost:8080/api/bank/addAmt/${accountData.accountNumber}`, { amount: amountData.amount })
+            console.log("the adding amount is : "+amountData.amount);
+            console.log("the account numbere  is : "+accountData.accountNumber);
+            console.log(response.data); 
+            const Amount=response.data.currBalance;
+            // Log the response data
+            // const  Amount=response.data.amount;
+             console.log("the user id is "+Amount);
+            if (Amount>0) {
+                   
+                      console.log("money added successfull");
+                       navigate('/home');
+            
+                       
+                   
+                    } else {
+                        
+                        console.error('some problem while inserting the user details');
+                    }
+                } catch (error) {
+                    // Handle errors, such as network issues or server errors
+                    console.log("enter wrong credintials")
+                    console.error('Error during add money:', error);
+                }
+        
     };
 
     return (
@@ -48,7 +91,7 @@ const AddMoney = () => {
                     </tr>
                     <tr>
                         <td><label>Amount :</label></td>
-                        <td><input type="text" name="add_amt" className="info_inp" /></td>
+                        <td><input type="text" name="amount" value={amountData.amount} onChange={handleInputChange} className="info_inp" /></td>
                     </tr>
                 </table>
                 <button type="button" onClick={handleDeposit} className="sign">Deposit</button>
