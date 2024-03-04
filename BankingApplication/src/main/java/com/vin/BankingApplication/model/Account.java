@@ -1,7 +1,11 @@
 package com.vin.BankingApplication.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,6 +23,11 @@ public class Account {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@JsonManagedReference
+	@OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+	private List<Transaction> transactions;
+	
 	@Column(unique = true)
 	private String accountNumber;
 	@Column
@@ -38,6 +48,14 @@ public class Account {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	
+	public List<Transaction> getTransactions() {
+		return transactions;
+	}
+	public void setTransactions(List<Transaction> transactions) {
+		this.transactions = transactions;
 	}
 	public String getAccountNumber() {
 		return accountNumber;
@@ -75,10 +93,16 @@ public class Account {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public Account(Long id, String accountNumber, String ifscCode, String bankName, String acctType, double currBalance,
-			User user) {
+
+	public Account() {
+		super();
+		
+	}
+	public Account(Long id, List<Transaction> transactions, String accountNumber, String ifscCode, String bankName,
+			String acctType, double currBalance, User user) {
 		super();
 		this.id = id;
+		this.transactions = transactions;
 		this.accountNumber = accountNumber;
 		this.ifscCode = ifscCode;
 		this.bankName = bankName;
@@ -86,15 +110,13 @@ public class Account {
 		this.currBalance = currBalance;
 		this.user = user;
 	}
-	public Account() {
-		super();
-		
-	}
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", accountNumber=" + accountNumber + ", ifscCode=" + ifscCode + ", bankName="
-				+ bankName + ", acctType=" + acctType + ", currBalance=" + currBalance + ", user=" + user + "]";
+		return "Account [id=" + id + ", transactions=" + transactions + ", accountNumber=" + accountNumber
+				+ ", ifscCode=" + ifscCode + ", bankName=" + bankName + ", acctType=" + acctType + ", currBalance="
+				+ currBalance + ", user=" + user + "]";
 	}
+	
 
 	
 	

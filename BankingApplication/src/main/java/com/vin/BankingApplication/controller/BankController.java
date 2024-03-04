@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vin.BankingApplication.model.Account;
+import com.vin.BankingApplication.model.Transaction;
 import com.vin.BankingApplication.model.User;
 import com.vin.BankingApplication.service.AccountService;
+import com.vin.BankingApplication.service.TransactionService;
 import com.vin.BankingApplication.service.UserService;
 
 @RestController
@@ -25,12 +27,14 @@ import com.vin.BankingApplication.service.UserService;
 public class BankController {
 	private  UserService userService;
 	private AccountService accountService;
+	private TransactionService transactionService;
 	
 //	@Autowired
-	public BankController(UserService userService, AccountService accountService) {
+	public BankController(UserService userService, AccountService accountService,TransactionService transactionService) {
 		super();
 		this.userService = userService;
 		this.accountService = accountService;
+		this.transactionService=transactionService;
 	}
 
 //Register	
@@ -73,22 +77,38 @@ public class BankController {
 		return ResponseEntity.ok(updatedUser);
 	}
 	//add money to the specfic account
-    @PutMapping("/addAmt/{accNmbr}")
-    public ResponseEntity<Account> addAmountToAcc(@PathVariable String accNmbr ,@RequestBody Map<String , Double> request){
+    @PutMapping("/addAmt/{id}")
+    public ResponseEntity<Account> addAmountToAcc(@PathVariable Long id ,@RequestBody Map<String , Double> request){
         Double amount = request.get("amount"); //storing the input
-        Account account = accountService.addAmountToAcc(accNmbr , amount);
+        Account account = accountService.addAmountToAcc(id , amount);
         return ResponseEntity.ok(account);
     }
 	
     
-    @PutMapping("/sendMoney/{accNmbr}")
-    public ResponseEntity<Account> sendMoney(@PathVariable String accNmbr,@RequestBody Map<String,Double> request){
+    @PutMapping("/sendMoney/{id}")
+    public ResponseEntity<Account> sendMoney(@PathVariable Long id ,@RequestBody Map<String,Double> request){
         Double amount = request.get("amount");
-        Account account = accountService.sendMoney(accNmbr, amount);
+        Account account = accountService.sendMoney(id, amount);
         return ResponseEntity.ok(account);
     }
 	
+    @GetMapping("/trxns/{Id}")
+	public ResponseEntity<List<Transaction>> getUserTransaction(@PathVariable Long Id) {
+    	List<Transaction> transactions = accountService.getUserTransaction(Id);
+		return ResponseEntity.ok(transactions);
+	}
+//    @PostMapping("/set/{userId}")
+//	public ResponseEntity<User> addAccountsToUser(@PathVariable Long userId, @RequestBody List<Account> accounts) {
+//		User updatedUser = userService.addAccountsToUser(userId, accounts);
+//		return ResponseEntity.ok(updatedUser);
+//	}
+    @PostMapping("/trxn/{id}")
+	public ResponseEntity<Account> setUserTransaction(@PathVariable Long id, @RequestBody List<Transaction> transactions) {
+		Account account = accountService.setUserTransaction(id, transactions);
+		return ResponseEntity.ok(account);
+	}
 	
+   
 	
 	
 	
@@ -116,4 +136,3 @@ public class BankController {
 //	return accountService.addAccountDetails(acc);
 //	
 //} 
-
