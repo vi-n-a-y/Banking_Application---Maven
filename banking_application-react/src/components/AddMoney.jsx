@@ -50,7 +50,7 @@ const AddMoney = () => {
             const Amount=response.data.currBalance;
             // Log the response data
             // const  Amount=response.data.amount;
-             console.log("the user id is "+Amount);
+             console.log("the amount added in account is :  "+Amount);
             if (Amount>0) {
                    
                       console.log("money added successfull");

@@ -16,7 +16,7 @@ const App=()=>{
           <Route path="/home" element={<Home />}/>
           <Route path="/addAcc" element={<AddAccount/>}/>
           <Route path="/addMoney/:accountId" element={<AddMoney/>}/>
-          <Route path="/sendMoney" element={<SendMoney/>}/>
+          <Route path="/sendMoney/:accountId" element={<SendMoney/>}/>
         </Routes>
       </BrowserRouter>
     </>

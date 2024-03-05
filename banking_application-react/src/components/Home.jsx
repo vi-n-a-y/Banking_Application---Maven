@@ -27,21 +27,29 @@ const Home = () => {
         navigate(`/addMoney/${selectedAccountId}`);
     };
 
-    const handleAddAccount = () => {
-        navigate('/addAcc');
+    const handleSendMoney = () => {
+        navigate(`/sendMoney/${selectedAccountId}`);
     };
+
+    const handleAddAccount = () => {
+        navigate(`/addAcc`);
+    };
+
 
     return (
         <div className="home_main">
         <div className="bg_black">
         <b><a className="logo1" href="#">Pir@es.Bank</a></b>
         <a className="nav" href="#">MENU</a>
-        <a className="nav" href="">ADD MONEY</a>
-        <a className="nav" href="">STATEMENT</a>
-        <a className="nav" href="">SEND MONEY</a>
+        {userData && userData[0].accounts.length > 0 && (
+                    <>
+                        <a className="nav" href="" onClick={handleAddMoney}>ADD MONEY</a>
+                        <a className="nav" href="" onClick={handleSendMoney}>SEND MONEY</a>
+                    </>
+                )}
         <input type="text" placeholder="search" />
         <button className="search">search</button>
-        <a href="logout.html"><button className="sign">logout</button></a>
+        <a href=""><button className="sign">logout</button></a>
     </div>
             {userData && (
                 <>
@@ -70,10 +78,9 @@ const Home = () => {
                     </tr>
                 </table>
             </div>
-            
+            <button className="home_btn" onClick={handleAddAccount}>Add Account</button>
             <h1 className="acc_head">Account Details</h1>
-            <button className="addAcct" onClick={handleAddAccount}>Add Account</button>
-
+           
                     <div className="acc_info">
                         {userData[0].accounts.length > 0 ? (
                             userData[0].accounts.map((account, index) => (
@@ -105,6 +112,7 @@ const Home = () => {
                 </tr>
                                     </table>
                                 </div>
+                                
                             ))
                         ) : (
                             <div>
@@ -114,13 +122,20 @@ const Home = () => {
                         )}
                     </div>
                     
-                  
+                    {userData[0].accounts.length > 0 && (
+                        <>
                         <button className="sign" id="btn" onClick={handleAddMoney}>Add Money</button>
-                    
+                        <button className="sign" id="btn" onClick={handleSendMoney}>Send Money</button>
+                        </>
+                    )}
                 </>
             )}
         </div>
+        
     );
+
+
+    
 };
 
 export default Home;
