@@ -33,6 +33,7 @@ const AddMoney = () => {
     };
     
     const handleHome = () => {
+      
         navigate('/home');
     };
 
@@ -53,18 +54,18 @@ const AddMoney = () => {
              console.log("the amount added in account is :  "+Amount);
             if (Amount>0) {
                    
-                      console.log("money added successfull");
+                     alert("money added successfull");
                        navigate('/home');
             
                        
                    
                     } else {
-                        
+                        alert('some problem while adding the Money');
                         console.error('some problem while adding the Money');
                     }
                 } catch (error) {
                     // Handle errors, such as network issues or server errors
-                    console.log("fail to addMoney to your account")
+                    alert("fail to addMoney to your account")
                     console.error('Error during add money:', error);
                 }
         

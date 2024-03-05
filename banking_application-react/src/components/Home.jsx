@@ -19,7 +19,7 @@ const Home = () => {
             const response = await verifyUser(uname);
             setUserData(response.data);
         } catch (error) {
-            console.error('Error fetching user data:', error);
+            console.error('Error while fetching user data:', error);
         }
     };
 

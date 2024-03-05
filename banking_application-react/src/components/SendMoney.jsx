@@ -36,14 +36,14 @@ const SendMoney = () => {
       // const  Amount=response.data.amount;
       console.log("the user id is " + Amount);
       if (Amount > 0) {
-        console.log("money added successfull");
+        alert("money added successfull");
         navigate("/home");
       } else {
-        console.error("some problem while inserting the user details");
+        console.error("some problem while sending the money");
       }
     } catch (error) {
       // Handle errors, such as network issues or server errors
-      console.log("enter wrong credintials");
+      alert("some problem while sending the money, for more details check console !");
       console.error("Error during add money:", error);
     }
   };

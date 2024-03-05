@@ -27,10 +27,11 @@ const AddAccount = () => {
             console.log(response.data);
             if (response.data.accounts.length > 0) {
                 console.log("the response id is : " + response.data.accounts[0].id);
+                alert("account added successfully");
                 navigate('/home');
             }
         } catch (error) {
-            console.log("something went wrong")
+            alert("something went wrong")
             console.error('Error during Adding account:', error);
         }
     };

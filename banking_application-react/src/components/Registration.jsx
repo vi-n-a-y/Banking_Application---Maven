@@ -30,18 +30,18 @@ const Registration = () => {
                         // Extract username from the first element of the array
                         // const regiUsername = response.data[0].uname;
                       // console.log("the register user name is "+regiUsername);
-                      console.log("SUCCESSFULL registered");
+                      alert("SUCCESSFULly REGISTERED");
                        navigate('/');
             
                        
                    
                     } else {
                         
-                        console.error('some problem while inserting the user details');
+                        alert('some problem while inserting the user details');
                     }
                 } catch (error) {
                     // Handle errors, such as network issues or server errors
-                    console.log("enter wrong credintials")
+                    alert("enter wrong credintials")
                     console.error('Error during login:', error);
                 }
     };

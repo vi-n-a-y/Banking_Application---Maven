@@ -51,7 +51,7 @@ const Login = () => {
                     }
                 } catch (error) {
                     // Handle errors, such as network issues or server errors
-                    alert("try again !",error);
+                    alert("SOMETHING WENT WRONG FOR MORE DETAILS PLEASE CHECK CONSOLE STATEMENTS !");
                     console.error('Error during login:', error);
                 }
     };
