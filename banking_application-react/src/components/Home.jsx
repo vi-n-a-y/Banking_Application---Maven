@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { verifyUser } from '../services/UserService';
+import { useParams } from 'react-router-dom';
 
 const Home = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     const [selectedAccountId, setSelectedAccountId] = useState(null);
-    // const [selectedAccountNumber, setSelectedAccountNumber] = useState(null);
+    const [isRadioSelected, setIsRadioSelected] = useState(false); // New state
+    const { uname } = useParams();
 
-
-   
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async () => {
         try {
-            const response = await verifyUser(localStorage.getItem('uname'));
+            const response = await verifyUser(uname);
             setUserData(response.data);
         } catch (error) {
             console.error('Error fetching user data:', error);
@@ -24,15 +24,29 @@ const Home = () => {
     };
 
     const handleAddMoney = () => {
-        navigate(`/addMoney/${selectedAccountId}`);
+        if (isRadioSelected) {
+            navigate(`/addMoney/${selectedAccountId}`);
+        }
+        else{
+            alert("please select atleast one account")
+        }
     };
 
     const handleSendMoney = () => {
-        navigate(`/sendMoney/${selectedAccountId}`);
+        if (isRadioSelected) {
+            navigate(`/sendMoney/${selectedAccountId}`);
+        } else{
+            alert("please select atleast one account")
+        }
     };
 
     const handleAddAccount = () => {
         navigate(`/addAcc`);
+    };
+
+    const handleRadioChange = (accountId) => {
+        setSelectedAccountId(accountId);
+        setIsRadioSelected(true);
     };
 
 
@@ -90,7 +104,7 @@ const Home = () => {
                                             <td><label>Account {index + 1} : </label></td>
                                             <td>
                                                 <input 
-                                                    type="radio"  name="id"   value={account.id}  className="info_text"  checked={selectedAccountId === account.id}  onChange={() => setSelectedAccountId(account.id)} />
+                                                    type="radio"  name="id"   value={account.id}  className="info_text"  checked={selectedAccountId === account.id}   onChange={() => handleRadioChange(account.id)}  />
                                             </td>
                                         </tr>
                                         <tr>
@@ -122,7 +136,7 @@ const Home = () => {
                         )}
                     </div>
                     
-                    {userData[0].accounts.length > 0 && (
+                    {userData[0].accounts.length > 0  &&(
                         <>
                         <button className="sign" id="btn" onClick={handleAddMoney}>Add Money</button>
                         <button className="sign" id="btn" onClick={handleSendMoney}>Send Money</button>

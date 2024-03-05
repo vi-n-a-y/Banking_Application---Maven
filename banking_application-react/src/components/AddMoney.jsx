@@ -60,11 +60,11 @@ const AddMoney = () => {
                    
                     } else {
                         
-                        console.error('some problem while inserting the user details');
+                        console.error('some problem while adding the Money');
                     }
                 } catch (error) {
                     // Handle errors, such as network issues or server errors
-                    console.log("enter wrong credintials")
+                    console.log("fail to addMoney to your account")
                     console.error('Error during add money:', error);
                 }
         
@@ -86,8 +86,16 @@ const AddMoney = () => {
                         <td><input type="text" name="add_ifscc_cd" value={accountData.ifscCode} className="info_inp" readOnly /></td>
                     </tr>
                     <tr>
+                        <td><label>Transaction Type :</label></td>
+                        <td>
+                        <td><input type="text" name="transactionType" value={"ADD"} className="info_inp" readOnly="true" /></td>
+                      
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td><label>Current Balance :</label></td>
-                        <td><input type="text" name="curr_balan" value={accountData.currBalance} className="info_inp" readOnly /></td>
+                        <td><input type="text" name="currBalance" value={accountData.currBalance} className="info_inp" readOnly /></td>
                     </tr>
                     <tr>
                         <td><label>Amount :</label></td>

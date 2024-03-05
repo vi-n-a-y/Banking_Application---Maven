@@ -36,22 +36,22 @@ const Login = () => {
                         // Check if the password is valid
                         if (passwordFromServer === enteredPassword) {
                             // Navigate to the home page `/home/${JSON.stringify(formData)}`
-                            localStorage.setItem('uname', response.data[0].uname);
-                            localStorage.setItem('userId', response.data[0].userId);
-                            console.log("the user name is from localStrorage",localStorage.getItem('uname'));
-                           // console.log(userId);
-                            navigate('/home');
+                            // localStorage.setItem('uname', response.data[0].uname);
+
+                            navigate(`/home/${formData.uname}`);
                         } else {
                             // Handle invalid password
                             console.error('Invalid password');
+                            alert("Invalid Password");
                         }
                     } else {
                         // Handle case where no user data is returned
                         console.error('No user data found');
+                        alert("enter wrong credintials");
                     }
                 } catch (error) {
                     // Handle errors, such as network issues or server errors
-                    console.log("enter wrong credintials")
+                    alert("try again !",error);
                     console.error('Error during login:', error);
                 }
     };
@@ -73,7 +73,7 @@ const Login = () => {
                                         placeholder="Enter password Here..." value={formData.password} onChange={handleInputChange} required /></td>
                             </tr>
                         </table>
-                        {/* <a href="#" className="forgot">forgot password ?</a> */}
+                        <a href="#" className="forgot">forgot password ?</a>
                         <button type="submit" className="sign_sub">Submit</button>
                     </form>
                     <button onClick={() => navigate('/register')} className="sign_regi">Register</button>

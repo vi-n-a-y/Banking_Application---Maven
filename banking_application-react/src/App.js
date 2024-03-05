@@ -13,10 +13,10 @@ const App=()=>{
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/home" element={<Home />}/>
+          <Route path="/home/:uname" element={<Home />}/>
           <Route path="/addAcc" element={<AddAccount/>}/>
           <Route path="/addMoney/:accountId" element={<AddMoney/>}/>
-          <Route path="/sendMoney/:accountId" element={<SendMoney/>}/>
+          <Route path="/sendMoney:accountId" element={<SendMoney/>}/>
         </Routes>
       </BrowserRouter>
     </>

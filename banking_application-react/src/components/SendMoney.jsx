@@ -11,9 +11,9 @@ const SendMoney = () => {
   const [amountData, setAmountData] = useState({});
   const [formData, setFormData]=useState([]);
 
-  useEffect(() => {
-    setFormData([{ toAccount: '', transactionType: '', description: '', trxnAmount: '', balance: '' }]);
-}, []);
+//   useEffect(() => {
+//     setFormData([{ toAccount: '', transactionType: '', description: '', trxnAmount: '', balance: '' }]);
+// }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -57,7 +57,7 @@ const SendMoney = () => {
         Home
       </button>
       <h1 className="acc_head">Send Money</h1>
-      <form action="trxns" onSubmit={handleSend}>
+      <form action="trxns" >
       {formData.map((formData, index) => (
         <table>
           <tr>
@@ -66,13 +66,11 @@ const SendMoney = () => {
               <input type="text" name="toAccount" value={formData.toAccount} onChange={(event) => handleInputChange(event, index)} className="info_inp" required />
             </td>
           </tr>
+         
           <tr>
-            <td>
-              <label>Transaction Type:</label>
-            </td>
-            <td>
-              <input type="text" name="transactionType" value={formData.transactionType} onChange={(event) => handleInputChange(event, index)} className="info_inp" />
-            </td>
+             <td><label>Transaction Type :</label></td><td>
+              <td><input type="text" name="transactionType" value={"ADD"}  className="info_inp" readOnly="true" /></td></td>
+                    
           </tr>
           <tr>
             <td>
@@ -87,12 +85,12 @@ const SendMoney = () => {
               <label>Total Amount to transfer :</label>
             </td>
             <td>
-              <input  type="text" name="trxnAmount" className="info_inp" value={formData.trxnAmount} onChange={(event) => handleInputChange(event, index)} required/>
+              <input  type="text" name="trxnAmount" className="info_inp" value={amountData.amount} onChange={(event) => handleInputChange(event, index)} required/>
             </td>
           </tr>
         </table>
          ))}
-        <button className="sign">Send</button>
+        <button className="sign" onClick={handleSend}>Send</button>
       </form>
     </div>
   );
