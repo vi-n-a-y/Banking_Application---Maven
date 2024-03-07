@@ -28,9 +28,9 @@ public class Transaction {
 	@CreationTimestamp
 	private Date trxnDate;
 	@Column
-	private String fromAccount;
+	private Account fromAccount;
 	@Column
-	private String toAccount;
+	private Account toAccount;
 	@Column
 	private String description;
 	@Column
