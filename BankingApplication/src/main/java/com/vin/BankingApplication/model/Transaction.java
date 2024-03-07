@@ -27,9 +27,9 @@ public class Transaction {
 	@Column
 	@CreationTimestamp
 	private Date trxnDate;
-	@Column
+	@JoinColumn(name="fromAccount" )
 	private Account fromAccount;
-	@Column
+	@JoinColumn(name="toAccount" )
 	private Account toAccount;
 	@Column
 	private String description;
