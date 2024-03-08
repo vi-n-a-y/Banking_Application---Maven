@@ -6,9 +6,11 @@ import Home from "./components/Home"
 import AddAccount from "./components/AddAccount";
 import AddMoney from "./components/AddMoney";
 import SendMoney from "./components/SendMoney";
+import Navbar from "./components/Navbar";
 const App=()=>{
   return (
     <>
+    <Navbar/>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />
