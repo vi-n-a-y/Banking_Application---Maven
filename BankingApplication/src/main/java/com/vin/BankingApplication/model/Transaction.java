@@ -2,8 +2,6 @@ package com.vin.BankingApplication.model;
 
 import java.sql.Date;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
@@ -13,23 +11,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.Table;
+
 
 
 @Entity
 
-@Table(name = "samp")
+@Table(name = "f")
 public class Transaction {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long trxnId;
-	@Column
-	@CreationTimestamp
+	
+	
+	@Column(name = "trxn_date", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date trxnDate;
-	@JoinColumn(name="fromAccount" )
+	@JsonBackReference
+	@ManyToOne
+	@JoinColumn(name="from_account",referencedColumnName = "accountNumber")
 	private Account fromAccount;
-	@JoinColumn(name="toAccount" )
+	
+	@ManyToOne
+	@JoinColumn(name="to_account",referencedColumnName = "accountNumber")
 	private Account toAccount;
 	@Column
 	private String description;
@@ -40,13 +45,12 @@ public class Transaction {
 	@Column
 	private double balance;
 	
+	
+	
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name="id" )
 	private Account account;
-	
-	
-	
 
 	public Long getTrxnId() {
 		return trxnId;
@@ -64,19 +68,19 @@ public class Transaction {
 		this.trxnDate = trxnDate;
 	}
 
-	public String getFromAccount() {
+	public Account getFromAccount() {
 		return fromAccount;
 	}
 
-	public void setFromAccount(String fromAccount) {
+	public void setFromAccount(Account fromAccount) {
 		this.fromAccount = fromAccount;
 	}
 
-	public String getToAccount() {
+	public Account getToAccount() {
 		return toAccount;
 	}
 
-	public void setToAccount(String toAccount) {
+	public void setToAccount(Account toAccount) {
 		this.toAccount = toAccount;
 	}
 
@@ -119,8 +123,15 @@ public class Transaction {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+
+	public Transaction() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
-	public Transaction(Long trxnId, Date trxnDate, String fromAccount, String toAccount, String description,
+	
+
+	public Transaction(Long trxnId, Date trxnDate, Account fromAccount, Account toAccount, String description,
 			String transactionType, double trxnAmount, double balance, Account account) {
 		super();
 		this.trxnId = trxnId;
@@ -134,17 +145,11 @@ public class Transaction {
 		this.account = account;
 	}
 
-	public Transaction() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public String toString() {
 		return "Transaction [trxnId=" + trxnId + ", trxnDate=" + trxnDate + ", fromAccount=" + fromAccount
 				+ ", toAccount=" + toAccount + ", description=" + description + ", transactionType=" + transactionType
 				+ ", trxnAmount=" + trxnAmount + ", balance=" + balance + ", account=" + account + "]";
 	}
-	
 	
 }
