@@ -102,17 +102,11 @@ public class BankController {
 //		User updatedUser = userService.addAccountsToUser(userId, accounts);
 //		return ResponseEntity.ok(updatedUser);
 //	}
-    @PostMapping("/trxn/{id}")
-	public ResponseEntity<Account> setUserTransaction(@PathVariable Long id, @RequestBody List<Transaction> transactions) {
-		Account account = accountService.setUserTransaction(id, transactions);
+    @PostMapping("/trxn/{id}/{fromAcc}/{toAcc}")
+	public ResponseEntity<Account> setUserTransaction(@PathVariable Long id,@PathVariable String fromAcc,@PathVariable String toAcc , @RequestBody List<Transaction> transactions) {
+		Account account = accountService.setUserTransaction(id,fromAcc,toAcc, transactions);
 		return ResponseEntity.ok(account);
 	}
-	
-   
-	
-	
-	
-	
 
 }
 
