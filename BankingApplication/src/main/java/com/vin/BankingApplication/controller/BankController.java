@@ -108,6 +108,31 @@ public class BankController {
 		return ResponseEntity.ok(account);
 	}
 
+
+
+	    @PostMapping("/transfer")
+    public ResponseEntity<Transaction> transferMoney(@RequestParam("fromAccountNumber") String fromAccountNumber,
+            @RequestParam("toAccountNumber") String toAccountNumber,
+            @RequestParam("amount") double amount,
+            @RequestParam("accType") String accType,
+            @RequestParam("description") String description) {
+// Fetch accounts from database
+    	System.out.println("my account number is "+ fromAccountNumber);
+    	System.out.println("receiver account number is "+ toAccountNumber);
+    	Account fromAccount = accountRepository.findByAccountNumber(fromAccountNumber);
+//    	fromAccount.getId();
+          Account toAccount = accountRepository.findByAccountNumber(toAccountNumber);
+          Transaction transaction=new Transaction();
+          
+        	  System.out.println("in if condition");
+            
+        	  transaction=transactionService.setUserTransaction(fromAccount, toAccount,accType, amount, description);
+        	 
+          
+          return ResponseEntity.ok(transaction);
+
+}
+
 }
 
 
