@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity
 
-@Table(name = "f")
+@Table(name = "g")
 public class Transaction {
 	
 	@Id
@@ -28,10 +28,12 @@ public class Transaction {
 	
 	@Column(name = "trxn_date", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date trxnDate;
-	@JsonBackReference
+	
+	@JsonBackReference(value="user-trxn")
 	@ManyToOne
 	@JoinColumn(name="from_account",referencedColumnName = "accountNumber")
 	private Account fromAccount;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="to_account",referencedColumnName = "accountNumber")
@@ -47,10 +49,10 @@ public class Transaction {
 	
 	
 	
-	@JsonBackReference
-	@ManyToOne
-	@JoinColumn(name="id" )
-	private Account account;
+//	 @JsonBackReference(value="user-trxn")
+//	@ManyToOne
+//	@JoinColumn(name="id", referencedColumnName = "id"  )
+//	private Account account;
 
 	public Long getTrxnId() {
 		return trxnId;
@@ -116,13 +118,13 @@ public class Transaction {
 		this.balance = balance;
 	}
 
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
+//	public Account getAccount() {
+//		return account;
+//	}
+//
+//	public void setAccount(Account account) {
+//		this.account = account;
+//	}
 
 	public Transaction() {
 		super();
@@ -142,14 +144,14 @@ public class Transaction {
 		this.transactionType = transactionType;
 		this.trxnAmount = trxnAmount;
 		this.balance = balance;
-		this.account = account;
+//		this.account = account;
 	}
 
 	@Override
 	public String toString() {
 		return "Transaction [trxnId=" + trxnId + ", trxnDate=" + trxnDate + ", fromAccount=" + fromAccount
 				+ ", toAccount=" + toAccount + ", description=" + description + ", transactionType=" + transactionType
-				+ ", trxnAmount=" + trxnAmount + ", balance=" + balance + ", account=" + account + "]";
+				+ ", trxnAmount=" + trxnAmount + ", balance=" + balance + "]";
 	}
 	
 }
