@@ -43,26 +43,26 @@ const AddMoney = () => {
 
         try {
             
-            const response = await addMoneyToAcc(accountData.id, amountData.amount );
+            const response = await addMoneyToAcc(accountData.accountNumber, amountData.amount );
            // const response= await axios.put(`http://localhost:8080/api/bank/addAmt/${accountData.accountNumber}`, { amount: amountData.amount })
-            console.log("the adding amount is : "+amountData.amount);
-            console.log("the account numbere  is : "+accountData.id);
+
+           const TID=response.data.trxnId;
+           console.log("The Transaction ID is  :  "+TID);
+           console.log("the adding amount is : "+amountData.amount);
+            console.log("the account numbere  is : "+accountData.accountNumber);
             console.log(response.data); 
-            const Amount=response.data.currBalance;
-            // Log the response data
-            // const  Amount=response.data.amount;
-             console.log("the amount added in account is :  "+Amount);
-            if (Amount>0) {
-                   
-                     alert("money added successfull");
+            
+            
+            if (TID>0) {
                        navigate('/home');
             
-                       
+                    console.log("money added successfull");
                    
                     } else {
-                        alert('some problem while adding the Money');
+                     //   alert('some problem while adding the Money');
                         console.error('some problem while adding the Money');
                     }
+               
                 } catch (error) {
                     // Handle errors, such as network issues or server errors
                     alert("fail to addMoney to your account")
@@ -76,7 +76,7 @@ const AddMoney = () => {
             <button className="home_btn">Logout</button>
            <button className="home_btn" onClick={handleHome}>Home</button>
             <h1 className="markRed">ADD MONEY</h1>
-            <form>
+            <form >
                 <table>
                     <tr>
                         <td><label>Account Number :</label></td>
@@ -86,13 +86,13 @@ const AddMoney = () => {
                         <td><label>IFSC Code :</label></td>
                         <td><input type="text" name="add_ifscc_cd" value={accountData.ifscCode} className="info_inp" readOnly /></td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                         <td><label>Transaction Type :</label></td>
                         <td>
                         <td><input type="text" name="transactionType" value={"ADD"} className="info_inp" readOnly="true" /></td>
                       
                         </td>
-                    </tr>
+                    </tr> */}
 
                     <tr>
                         <td><label>Current Balance :</label></td>
@@ -100,13 +100,40 @@ const AddMoney = () => {
                     </tr>
                     <tr>
                         <td><label>Amount :</label></td>
-                        <td><input type="text" name="amount" value={amountData.amount} onChange={handleInputChange} className="info_inp" /></td>
+                        <td><input type="number" name="amount" value={amountData.amount} onChange={handleInputChange} className="info_inp" /></td>
                     </tr>
                 </table>
-                <button type="button" onClick={handleDeposit} className="sign">Deposit</button>
+                <button type="button"  className="sign" onClick={handleDeposit}>Deposit</button>
             </form>
         </div>
     );
 };
 
 export default AddMoney;
+
+
+// const handleDeposit = async (event) => {
+//     event.preventDefault();
+  
+//     try {
+//         const response = await addMoneyToAcc(accountData.accountNumber, amountData.amount);
+  
+//         // Check if the response contains the data property and if trxnId is defined within it
+//         if (response.data && response.data.trxnId !== undefined) {
+//             console.log("The Transaction ID is  : ", response.data.trxnId);
+//             console.log("the adding amount is : " + amountData.amount);
+//             console.log("the account number is : " + accountData.accountNumber);
+            
+//             // Handle successful transaction
+//             navigate('/home');
+//             console.log("Money added successfully");
+//         } else {
+//             // Handle case where trxnId is not defined in the response
+//             console.error('Transaction ID is undefined in the response');
+//         }
+//     } catch (error) {
+//         // Handle errors, such as network issues or server errors
+//         alert("Failed to add money to your account");
+//         console.error('Error during add money:', error);
+//     }
+//   };

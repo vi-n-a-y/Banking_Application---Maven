@@ -36,9 +36,9 @@ const Login = () => {
                         // Check if the password is valid
                         if (passwordFromServer === enteredPassword) {
                             // Navigate to the home page `/home/${JSON.stringify(formData)}`
-                            // localStorage.setItem('uname', response.data[0].uname);
+                             localStorage.setItem('uname', response.data[0].uname);
 
-                            navigate(`/home/${formData.uname}`);
+                            navigate(`/home`);
                         } else {
                             // Handle invalid password
                             console.error('Invalid password');

@@ -1,15 +1,20 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { sendMoneyToAcc } from "../services/UserService";
 
 const SendMoney = () => {
   let navigate = useNavigate();
-  const { accountId } = useParams();
+  const { accountNumber } = useParams();
+  const [formData, setFormData] = useState({
+    toAccount: '',
+    description: '',
+    amount: '',
+   
+});
 
-  const [amountData, setAmountData] = useState({});
-  const [formData, setFormData]=useState([]);
+ 
 
 //   useEffect(() => {
 //     setFormData([{ toAccount: '', transactionType: '', description: '', trxnAmount: '', balance: '' }]);
@@ -17,7 +22,7 @@ const SendMoney = () => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setAmountData({ ...amountData, [name]: value }); // Spread the existing state object
+    setFormData({ ...formData, [name]: value });  // Spread the existing state object
   };
   const handleHome = () => {
     navigate("/home");
@@ -25,28 +30,20 @@ const SendMoney = () => {
 
   const handleSend = async (event) => {
     event.preventDefault();
-
+  
     try {
-      const response = await sendMoneyToAcc(accountId, amountData.amount);
-      console.log("the adding amount is : " + amountData.amount);
-    //   console.log("the account numbere  is : " + accountData.accountNumber);
-      console.log(response.data);
-      const Amount = response.data.currBalance;
-      // Log the response data
-      // const  Amount=response.data.amount;
-      console.log("the user id is " + Amount);
-      if (Amount > 0) {
-        alert("money added successfull");
-        navigate("/home");
-      } else {
-        console.error("some problem while sending the money");
-      }
+      const response = await sendMoneyToAcc(accountNumber,formData.toAccount,formData.amount,formData.description);
+      
+      // Handle response as needed (e.g., show success message, navigate to another page)
+      console.log('Transaction successful:', response.data);
+      // Example: navigate to the home page after successful transaction
+      navigate("/home");
     } catch (error) {
-      // Handle errors, such as network issues or server errors
-      alert("some problem while sending the money, for more details check console !");
-      console.error("Error during add money:", error);
+      // Handle error (e.g., show error message)
+      console.error('Error sending money:', error);
     }
   };
+
 
   return (
     <div className="pers_info">
@@ -57,43 +54,52 @@ const SendMoney = () => {
         Home
       </button>
       <h1 className="acc_head">Send Money</h1>
-      <form action="trxns" >
-      {formData.map((formData, index) => (
+      <form onSubmit={handleSend} >
+    
         <table>
+        <tr>
+            <td><label>Your Account Number :</label> </td>
+            <td>
+              <input type="text" name="FromAccount" value={accountNumber}  className="info_inp" readOnly />
+            </td>
+          </tr>
+
           <tr>
             <td><label>Receiver Account Number :</label> </td>
             <td>
-              <input type="text" name="toAccount" value={formData.toAccount} onChange={(event) => handleInputChange(event, index)} className="info_inp" required />
+              <input type="text" name="toAccount" value={formData.toAccount} onChange={handleInputChange} className="info_inp" required />
             </td>
           </tr>
          
-          <tr>
-             <td><label>Transaction Type :</label></td><td>
-              <td><input type="text" name="transactionType" value={"ADD"}  className="info_inp" readOnly="true" /></td></td>
-                    
-          </tr>
+        
           <tr>
             <td>
               <label>Description :</label>
             </td>
             <td>
-              <input type="text" name="description"  className="info_inp" value={formData.description} onChange={(event) => handleInputChange(event, index)} required />
+              <input type="text" name="description"  className="info_inp" value={formData.description} onChange={handleInputChange} required />
             </td>
           </tr>
+
           <tr>
             <td>
-              <label>Total Amount to transfer :</label>
+              <label>Amount Send :</label>
             </td>
             <td>
-              <input  type="text" name="trxnAmount" className="info_inp" value={amountData.amount} onChange={(event) => handleInputChange(event, index)} required/>
+              <input type="number" name="amount"  className="info_inp" value={formData.amount} onChange={handleInputChange} required />
             </td>
           </tr>
+
         </table>
-         ))}
-        <button className="sign" onClick={handleSend}>Send</button>
+       
+        <button className="sign" >Send</button>
       </form>
     </div>
   );
 };
 
 export default SendMoney;
+
+
+
+

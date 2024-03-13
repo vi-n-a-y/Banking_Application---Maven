@@ -79,9 +79,9 @@ const Registration = () => {
                             </tr>
                         </tbody>
                     </table>
-                    <button type="submit" className="regi_btn">Submit</button>
+                    <button type="submit" className="regi_btn" onClick={handleSubmit}>Submit</button>
                 </form>
-                <button className="regi_btn" onClick={handleSubmit}>Sign in</button>
+                <button onClick={() => navigate('/')} className="regi_btn">SignIn</button>
                 </div>
             </div>
         </div>
