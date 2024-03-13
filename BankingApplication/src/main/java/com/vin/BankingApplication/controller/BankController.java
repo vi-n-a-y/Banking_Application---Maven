@@ -97,11 +97,7 @@ public class BankController {
     	List<Transaction> transactions = accountService.getUserTransaction(Id);
 		return ResponseEntity.ok(transactions);
 	}
-//    @PostMapping("/set/{userId}")
-//	public ResponseEntity<User> addAccountsToUser(@PathVariable Long userId, @RequestBody List<Account> accounts) {
-//		User updatedUser = userService.addAccountsToUser(userId, accounts);
-//		return ResponseEntity.ok(updatedUser);
-//	}
+
     @PostMapping("/trxn/{id}/{fromAcc}/{toAcc}")
 	public ResponseEntity<Account> setUserTransaction(@PathVariable Long id,@PathVariable String fromAcc,@PathVariable String toAcc , @RequestBody List<Transaction> transactions) {
 		Account account = accountService.setUserTransaction(id,fromAcc,toAcc, transactions);
@@ -133,25 +129,36 @@ public class BankController {
 
 }
 
+    @PostMapping("/addMoney")
+    public ResponseEntity<Transaction> setAddTransaction(@RequestParam("fromAccountNumber")String fromAccountNumber,
+    													 @RequestParam("amount") double amount ) {
+// Fetch accounts from database
+    	System.out.println("my account number is "+ fromAccountNumber);
+    	
+    	Account fromAccount = accountRepository.findByAccountNumber(fromAccountNumber)
+    			.orElseThrow(()-> new ResourceNotFoundException("Account not found with Account Number : "+fromAccountNumber));
+    		      
+
+            
+        	 Transaction transaction=transactionService.setAddTransaction(fromAccount,  amount );
+        	 
+          
+          return ResponseEntity.ok(transaction);
+
 }
+    
+    @GetMapping("/statement")
+    public List<Transaction> generateStatement(@RequestParam String accountNumber, 
+                                               @RequestParam String startDate,
+                                               @RequestParam String endDate) {
+    	Account account = accountRepository.findByAccountNumber(accountNumber)
+    			.orElseThrow(()-> new ResourceNotFoundException("Account not found with Account Number : "+accountNumber));
+    		   
+    	
+    	
+    	 List<Transaction> transaction=transactionService.generateStatement(account, startDate, endDate);
+    	 return transaction;
+    }
+    
 
-
-
-//public ResponseEntity<String> CheckCredintials(@RequestBody User user) {
-//	String username=user.getUname();
-//	String password=user.getPassword();	
-//	
-//	if (userService.isValidCredentials(username, password)) {
-//        return ResponseEntity.ok("Login successful");
-//    } else {
-//        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-//    }
-//	
-//}
-
-//
-//@PostMapping("/add/acc")
-//public Account addAccountDetails(@RequestBody Account acc) {
-//	return accountService.addAccountDetails(acc);
-//	
-//} 
+}
