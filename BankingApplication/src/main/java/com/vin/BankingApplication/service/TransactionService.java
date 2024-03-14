@@ -7,8 +7,7 @@ import com.vin.BankingApplication.model.Transaction;
 
 public interface TransactionService {
 
-	Transaction setUserTransaction(Account fromAccount, Account toAccount, String accType, double amount,
-			String description);
+	Transaction setUserTransaction(Account fromAccount, Account toAccount, double amount,String description);
 
 	Account addAmountToAcc(Long id, Double amount);
 
@@ -18,4 +17,5 @@ public interface TransactionService {
 
 	List<Transaction> generateStatement(Account account, String startDate, String endDate);
 
+}
 }
