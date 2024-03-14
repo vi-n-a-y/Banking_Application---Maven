@@ -62,8 +62,7 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Transactional
-	public Transaction setUserTransaction(Account fromAccount, Account toAccount, String accType, double amount,
-			String description) {
+	public Transaction setUserTransaction(Account fromAccount, Account toAccount,  double amount,String description) {
 		// Deduct amount from the sender's account
 
 		System.out.println(fromAccount.getCurrBalance());
@@ -118,26 +117,3 @@ public class TransactionServiceImpl implements TransactionService {
 		return transactionList;
 	}
 } 
-   
-	
-	
-//	@Transactional
-//    public void performTransaction(Account fromAccount, Account toAccount, double amount, String description) {
-//        // Deduct amount from the sender's account
-//        fromAccount.setCurrBalance(fromAccount.getCurrBalance() - amount);
-//        accountRepository.save(fromAccount);
-//
-//        // Add amount to the receiver's account
-//        toAccount.setCurrBalance(toAccount.getCurrBalance() + amount);
-//        accountRepository.save(toAccount);
-//
-//        // Create a transaction record
-//        Transaction transaction = new Transaction();
-//        transaction.setFromAccount(fromAccount);
-//        transaction.setToAccount(toAccount);
-//        transaction.setDescription(description);
-//        transaction.setTrxnAmount(amount);
-//        // Set other transaction properties as needed
-//        transactionRepository.save(transaction);
-//    }
-
