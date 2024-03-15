@@ -32,19 +32,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-
-//	public User getUserById(int user_id) {
-//return userRepository.findById(user_id).orElseThrow(() -> 
-//				new ResourceNotFoundException("User", "Id", user_id));
-//
-//}
-
-//	   public boolean isValidCredentials(String username) {
-//	        User user = userRepository.findByUname(username);
-//	        return user != null; // If user is found, credentials are valid
-//	    }
-
-	
 	public List<Account> getUserAccounts(Long userId) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
@@ -55,18 +42,7 @@ public class UserServiceImpl implements UserService {
 
 
 	
-//	public List<Account> getUserAccounts(Long userId) {
-//        User user = userRepository.findById(userId).orElse(null);
-//     
-//    }
-//	
     public List<User> getUserDataByUsername(String username) {
-        // Check if the credentials are valid
-//        if (!isValidCredentials(username)) {
-//            throw new ResourceNotFoundException("Invalid username or password");
-//        }
-        
-        // If credentials are valid, retrieve user data based on the username
         List<User> users = userRepository.findByUname(username);
         if (users.isEmpty()) {
             throw new ResourceNotFoundException("User not found"); // Handle case where user with the provided username doesn't exist
@@ -91,17 +67,8 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return user;
-    }
-
-
-
-
-	
+    }	
 	
 }
-
-
-	
-	
 
 
