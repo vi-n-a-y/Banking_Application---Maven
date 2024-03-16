@@ -154,8 +154,7 @@ public class BankController {
     	Account account = accountRepository.findByAccountNumber(accountNumber)
     			.orElseThrow(()-> new ResourceNotFoundException("Account not found with Account Number : "+accountNumber));
     		   
-    	
-    	
+
     	 List<Transaction> transaction=transactionService.generateStatement(account, startDate, endDate);
     	 return transaction;
     }
