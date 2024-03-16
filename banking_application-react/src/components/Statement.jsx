@@ -1,85 +1,85 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { getStatement } from "../services/UserService";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const Statement = () => {
   // Define state variables
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [stm, setStm] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  const fetchData = async () => {
-    setIsLoading(true);
-    try {
-      // Perform axios API call here
-      const response = await axios.get("/your-api-endpoint", {
-        params: {
-          startDate,
-          endDate,
-        },
-      });
-      setStm(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      setError(error);
-      setIsLoading(false);
-    }
-  };
+let navigate=useNavigate();
+const {accountNumber}=useParams();
+const {formData,setFormData}=useState({
+  startDate:'',
+  endDate:''
+});
 
-  const handleDateChange = (e) => {
-    // Update state when date inputs change
-    const { name, value } = e.target;
-    if (name === "startDate") {
-      setStartDate(value);
-    } else if (name === "endDate") {
-      setEndDate(value);
-    }
-  };
+const handleInputChange=(event)=>{
+  const{name,value}=event.target;
+  setFormData({...formData,[name]:value});
+};
+const handleHome=()=>{
+  navigate("/home");
+};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Fetch data when form is submitted
-    fetchData();
-  };
+const handleStatement=async(event)=>{
+  event.preventDefault();
+
+try{
+  const response=await getStatement(accountNumber,formData.startDate,formData.endDate);
+  console.log("statement data is :",response.data);
+
+
+
+
+}catch(error){
+  console.error("error in statament : ",error);
+}
+
+
+
+};
+
+
+  
+
 
   return (
     <div className="stmPage" id="st">
       <div className="pers_info">
         <button
           className="home_btn"
-          onClick={() => (window.location.href = "home.jsp")}
+          onClick={handleHome}
         >
           Home
         </button>
         <h1 className="acc_head">Statement Form</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleStatement}>
           <div className="min_stm">
             <label>Start Date : </label>
             <input
               type="date"
               placeholder="select start date"
-              name="startDate"
-              value={startDate}
-              onChange={handleDateChange}
+              name="startDate" 
+              value={formData.startDate}
+              onChange={handleInputChange}
             />
             <label>End Date :</label>
             <input
               type="date"
               placeholder="select end date"
-              name="endDate"
-              value={endDate}
-              onChange={handleDateChange}
+              name="endDate" 
+              value={formData.endDate}
+              onChange={handleInputChange}
             />
             <button type="submit">Fetch Data</button>
           </div>
         </form>
-        {isLoading ? (
+        {/* {isLoading ? (
           <p>Loading...</p>
         ) : error ? (
           <p>Error: {error.message}</p>
-        ) : stm.length > 0 ? (
+        ) : stm.length > 0 ? ( */}
           <table
             border="1
 "
@@ -119,7 +119,7 @@ const Statement = () => {
             </h1>
             <button
               className="sign"
-              onClick={() => (window.location.href = "home.jsp")}
+              onClick={() => (window.location.href = "/Home")}
             >
               Home
             </button>
