@@ -22,6 +22,7 @@ const AddAccount = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        console.log("the userId in while adding the account number is : "+localStorage.getItem('userId'));
         try {
             const response = await addAccToUser(localStorage.getItem('userId'), formData);
             console.log(response.data);
