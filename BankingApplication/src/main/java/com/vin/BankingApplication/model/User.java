@@ -16,15 +16,14 @@ import jakarta.persistence.Table;
 //import lombok.Data ;
 
 @Entity
-//@Table(name = "babu")
 @Table(name = "sample")
 public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
-	
-	 @JsonManagedReference
+
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<Account> accounts;
 
@@ -128,8 +127,5 @@ public class User {
 		return "User [userId=" + userId + ", accounts=" + accounts + ", uname=" + uname + ", password=" + password
 				+ ", fullName=" + fullName + ", email=" + email + ", phno=" + phno + ", address=" + address + "]";
 	}
-	
-	
-	
 
 }

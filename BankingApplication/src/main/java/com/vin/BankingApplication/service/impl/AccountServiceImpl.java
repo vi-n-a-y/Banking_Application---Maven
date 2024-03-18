@@ -31,11 +31,10 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	public Account createAccount(Account account) {
-		// Set the user for the account
-		User user = account.getUser(); // Assuming getUser method in Account returns User
+
+		User user = account.getUser();
 		account.setUser(user);
 
-		// Save the account
 		return accountRepository.save(account);
 	}
 

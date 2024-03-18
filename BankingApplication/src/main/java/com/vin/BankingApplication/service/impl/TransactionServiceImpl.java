@@ -33,17 +33,15 @@ public class TransactionServiceImpl implements TransactionService {
 
 	public Account addAmountToAcc(Long id, Double amount) {
 		Account account = accountRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id)); // if doesnt exists
-																									// in the database
-																									// then throw
-																									// exception
+				.orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
+
 		double totalAmount = account.getCurrBalance() + amount;
 		account.setCurrBalance(totalAmount);
 		Account savedAccount = accountRepository.save(account);
 		return savedAccount;
 	}
 
-	public Account sendMoney(Long id, long id1, Double amount) {
+	public Account sendMoney(Long id, Long id1, Double amount) {
 		Account account = accountRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + id));
 		Account account1 = accountRepository.findById(id1)
@@ -53,6 +51,7 @@ public class TransactionServiceImpl implements TransactionService {
 		}
 		double senderBal = account.getCurrBalance() - amount;
 		double receiveBal = account1.getCurrBalance() + amount;
+		System.out.println("the available balance in sender bank is :" + senderBal);
 		System.out.println("the available balance in receiver bank is :" + receiveBal);
 		account.setCurrBalance(senderBal);
 		account1.setCurrBalance(receiveBal);
@@ -62,11 +61,9 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Transactional
-	public Transaction setUserTransaction(Account fromAccount, Account toAccount,  double amount,String description) {
-		// Deduct amount from the sender's account
+	public Transaction setUserTransaction(Account fromAccount, Account toAccount, double amount, String description) {
 
 		System.out.println(fromAccount.getCurrBalance());
-//    	System.out.println(fromAccount);
 		Transaction transaction = new Transaction();
 
 		long senderId = fromAccount.getId();
@@ -80,7 +77,7 @@ public class TransactionServiceImpl implements TransactionService {
 			transaction.setDescription(description);
 			transaction.setTrxnAmount(amount);
 			transaction.setBalance(fromAccount.getCurrBalance());
-			System.out.println(fromAccount.getCurrBalance());
+			System.out.println("the balance is the sender account is : " + fromAccount.getCurrBalance());
 		}
 		System.out.println(fromAccount.getId());
 		transactionRepository.save(transaction);
@@ -106,9 +103,12 @@ public class TransactionServiceImpl implements TransactionService {
 
 	@Override
 	public List<Transaction> generateStatement(Account account, String startDate, String endDate) {
+		System.out.println("the start date is : " + startDate);
+		System.out.println("the end date is : " + endDate);
 		LocalDate start = LocalDate.parse(startDate, DateTimeFormatter.ISO_DATE);
 		LocalDate end = LocalDate.parse(endDate, DateTimeFormatter.ISO_DATE);
-
+		System.out.println("After parse the start date is : " + start);
+		System.out.println("After parse the end date is : " + end);
 		List<Transaction> transactionList = transactionRepository.findAll().stream()
 				.filter(transaction -> transaction.getFromAccount().equals(account)).filter(transaction -> {
 					LocalDate trxnDate = transaction.getTrxnDate();
@@ -116,4 +116,4 @@ public class TransactionServiceImpl implements TransactionService {
 				}).collect(Collectors.toList());
 		return transactionList;
 	}
-} 
+}
