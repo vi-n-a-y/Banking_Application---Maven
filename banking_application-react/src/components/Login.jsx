@@ -37,7 +37,7 @@ const Login = () => {
                         if (passwordFromServer === enteredPassword) {
                             // Navigate to the home page `/home/${JSON.stringify(formData)}`
                              localStorage.setItem('uname', response.data[0].uname);
-
+                             localStorage.setItem('userId', response.data[0].userId);
                             navigate(`/home`);
                         } else {
                             // Handle invalid password
@@ -84,6 +84,3 @@ const Login = () => {
 };
 
 export default Login;
-      // Add your logic to handle form submission here
-        //the react does not have the ablity to make HTTP requests, thus we need to use third-party libraries to achieve this.
-        //the fetch API  is a web standard built for most of the modern browsers
