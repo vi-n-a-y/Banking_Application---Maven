@@ -86,14 +86,7 @@ const AddMoney = () => {
                         <td><label>IFSC Code :</label></td>
                         <td><input type="text" name="add_ifscc_cd" value={accountData.ifscCode} className="info_inp" readOnly /></td>
                     </tr>
-                    {/* <tr>
-                        <td><label>Transaction Type :</label></td>
-                        <td>
-                        <td><input type="text" name="transactionType" value={"ADD"} className="info_inp" readOnly="true" /></td>
-                      
-                        </td>
-                    </tr> */}
-
+                   
                     <tr>
                         <td><label>Current Balance :</label></td>
                         <td><input type="text" name="currBalance" value={accountData.currBalance} className="info_inp" readOnly /></td>
@@ -112,28 +105,3 @@ const AddMoney = () => {
 export default AddMoney;
 
 
-// const handleDeposit = async (event) => {
-//     event.preventDefault();
-  
-//     try {
-//         const response = await addMoneyToAcc(accountData.accountNumber, amountData.amount);
-  
-//         // Check if the response contains the data property and if trxnId is defined within it
-//         if (response.data && response.data.trxnId !== undefined) {
-//             console.log("The Transaction ID is  : ", response.data.trxnId);
-//             console.log("the adding amount is : " + amountData.amount);
-//             console.log("the account number is : " + accountData.accountNumber);
-            
-//             // Handle successful transaction
-//             navigate('/home');
-//             console.log("Money added successfully");
-//         } else {
-//             // Handle case where trxnId is not defined in the response
-//             console.error('Transaction ID is undefined in the response');
-//         }
-//     } catch (error) {
-//         // Handle errors, such as network issues or server errors
-//         alert("Failed to add money to your account");
-//         console.error('Error during add money:', error);
-//     }
-//   };

@@ -63,19 +63,7 @@ const Home = () => {
 
     return (
         <div className="home_main">
-        <div className="bg_black">
-        <b><a className="logo1" href="#">Pir@es.Bank</a></b>
-        <a className="nav" href="#">MENU</a>
-        {userData && userData[0].accounts.length > 0 && (
-                    <>
-                        <a className="nav" href="" onClick={handleAddMoney}>ADD MONEY</a>
-                        <a className="nav" href="" onClick={handleSendMoney}>SEND MONEY</a>
-                    </>
-                )}
-        <input type="text" placeholder="search" />
-        <button className="search">search</button>
-        <a href=""><button className="sign">logout</button></a>
-    </div>
+        
             {userData && (
                 <>
                 <div className="pers_info">

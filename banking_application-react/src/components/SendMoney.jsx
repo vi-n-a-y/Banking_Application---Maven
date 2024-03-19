@@ -14,15 +14,9 @@ const SendMoney = () => {
    
 });
 
- 
-
-//   useEffect(() => {
-//     setFormData([{ toAccount: '', transactionType: '', description: '', trxnAmount: '', balance: '' }]);
-// }, []);
-
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });  // Spread the existing state object
+    setFormData({ ...formData, [name]: value }); 
   };
   const handleHome = () => {
     navigate("/home");
@@ -33,13 +27,9 @@ const SendMoney = () => {
   
     try {
       const response = await sendMoneyToAcc(accountNumber,formData.toAccount,formData.amount,formData.description);
-      
-      // Handle response as needed (e.g., show success message, navigate to another page)
       console.log('Transaction successful:', response.data);
-      // Example: navigate to the home page after successful transaction
       navigate("/home");
     } catch (error) {
-      // Handle error (e.g., show error message)
       console.error('Error sending money:', error);
     }
   };

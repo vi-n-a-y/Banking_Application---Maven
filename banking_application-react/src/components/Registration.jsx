@@ -27,9 +27,6 @@ const Registration = () => {
             const userIdFromServer=response.data.userId;
             console.log("the user id is "+userIdFromServer);
             if (userIdFromServer>0) {
-                        // Extract username from the first element of the array
-                        // const regiUsername = response.data[0].uname;
-                      // console.log("the register user name is "+regiUsername);
                       alert("SUCCESSFULly REGISTERED");
                        navigate('/');
             

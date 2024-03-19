@@ -1,49 +1,22 @@
-
 import React, { useState } from 'react';
-import '../App.css';
+import '../index.css';
 
-const Nav = () => {
-  const [initialPosition, setInitialPosition] = useState("75%");
+const Navbar = () => {
 
-  const highlightLink = (index, end) => {
-    const percentages = ["75%", "50%", "25%", "0"];
-    let targetPosition = index !== -1 ? percentages[index] : end;
-
-    setInitialPosition(targetPosition);
-    setTimeout(() => {
-      document.getElementById("menuList").classList.add("clicked");
-    }, 0);
-  };
-
-  const handleLinkClick = (index) => {
-    highlightLink(index);
-  };
-
-  const handleKeyPress = (event) => {
-    let start = +initialPosition.slice(0, 2) || 0;
-    let end;
-
-    if (event.key === "ArrowRight") {
-      end = start !== 0 ? start - 25 : 0;
-    }
-    if (event.key === "ArrowLeft") {
-      end = start !== 75 ? start + 25 : 75;
-    }
-
-    highlightLink(-1, end + "%");
-  };
 
   return (
-    <nav>
-      <ul id="menuList" onKeyDown={handleKeyPress}>
-        <li><a href="#" className="nav-link" onClick={() => handleLinkClick(0)}>Home</a></li>
-        <li><a href="#" className="nav-link" onClick={() => handleLinkClick(1)}>Products</a></li>
-        <li><a href="#" className="nav-link" onClick={() => handleLinkClick(2)}>Contact Us</a></li>
-        <li><a href="#" className="nav-link" onClick={() => handleLinkClick(3)}>About Us</a></li>
-      </ul>
-    </nav>
+  <nv>
+    <div className="bg_black">
+        <b><a className="logo1" href="#">Self B@/\/k</a></b>
+        <a className="nav" href="#">Menu</a>
+        <a className="nav" href="" >Jobs</a>
+        <a className="nav" href="" >Contact Us</a>     
+        <input type="text" placeholder="search" />
+        <button className="search">Search</button>
+        <a href=""><button className="sign">Logout</button></a>
+    </div>
+  </nv>
   );
 };
 
-export default Nav;
-
+export default Navbar;

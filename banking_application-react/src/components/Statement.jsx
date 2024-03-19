@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from "react-router-dom";
+import { getStatement } from "../services/UserService";
 
 const Statement = () => {
   const [transactions, setTransactions] = useState([]);
@@ -16,13 +16,7 @@ const Statement = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get('http://localhost:8080/api/bank/statement', {
-        params: {
-          accountNumber: accountNumber,
-          startDate: startDate,
-          endDate: endDate
-        }
-      });
+      const response = await getStatement(accountNumber,startDate,endDate);
 
       setTransactions(response.data);
       setError(response.data.length === 0 ? 'No transactions found for the selected dates.' : '');
@@ -75,8 +69,8 @@ const Statement = () => {
                 <thead>
                   <tr>
                     <th>Transaction ID</th>
-                    <th>From Account</th>
-                    <th>To Account</th>
+                    <th>Account</th>
+                    <th>Receiver/sender Account</th>
                     <th>Date</th>
                     <th>Description</th>
                     <th>Transaction Type</th>
@@ -108,4 +102,3 @@ const Statement = () => {
 };
 
 export default Statement;
-
