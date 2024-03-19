@@ -65,6 +65,7 @@ public class TransactionServiceImpl implements TransactionService {
 
 		System.out.println(fromAccount.getCurrBalance());
 		Transaction transaction = new Transaction();
+		Transaction transaction1 = new Transaction();
 
 		long senderId = fromAccount.getId();
 		long receiverId = toAccount.getId();
@@ -78,9 +79,18 @@ public class TransactionServiceImpl implements TransactionService {
 			transaction.setTrxnAmount(amount);
 			transaction.setBalance(fromAccount.getCurrBalance());
 			System.out.println("the balance is the sender account is : " + fromAccount.getCurrBalance());
+			transaction1.setTrxnDate(LocalDate.now());
+			transaction1.setFromAccount(toAccount);
+			transaction1.setToAccount(fromAccount);
+			transaction1.setTransactionType("received");
+			transaction1.setDescription(description);
+			transaction1.setTrxnAmount(amount);
+			transaction1.setBalance(toAccount.getCurrBalance());
 		}
+
 		System.out.println(fromAccount.getId());
 		transactionRepository.save(transaction);
+		transactionRepository.save(transaction1);
 		return transaction;
 	}
 
